@@ -77,15 +77,16 @@ truck-id {
   background-color: rgb(78, 91, 175);
   color: white;
 }
-truck {
-  background-color: rgb(28, 49, 184);
+moto {
+  background-color: rgb(17, 114, 64);
   color: white;
+  margin-bottom: 5vh;
 }
-truck-id[type]::before {
-  color: rgb(8, 18, 83) !important;
+moto-id[type]::before {
+  color: rgb(6, 49, 27) !important;
 }
-truck-id {
-  background-color: rgb(78, 91, 175);
+moto-id {
+  background-color: rgb(46, 132, 88);
   color: white;
 }
 price {
