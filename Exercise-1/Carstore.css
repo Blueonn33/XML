@@ -53,6 +53,7 @@ truck,
 moto {
   display: block;
   padding: 10px;
+  width: 80%;
 }
 car {
   background-color: rgb(79, 49, 79);
@@ -63,6 +64,28 @@ car-id[type]::before {
 }
 car-id {
   background-color: rgb(130, 93, 130);
+  color: white;
+}
+truck {
+  background-color: rgb(28, 49, 184);
+  color: white;
+}
+truck-id[type]::before {
+  color: rgb(8, 18, 83) !important;
+}
+truck-id {
+  background-color: rgb(78, 91, 175);
+  color: white;
+}
+truck {
+  background-color: rgb(28, 49, 184);
+  color: white;
+}
+truck-id[type]::before {
+  color: rgb(8, 18, 83) !important;
+}
+truck-id {
+  background-color: rgb(78, 91, 175);
   color: white;
 }
 price {
