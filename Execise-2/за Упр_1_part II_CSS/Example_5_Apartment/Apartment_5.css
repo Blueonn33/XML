@@ -1,0 +1,73 @@
+apartments {
+    display: table;
+    background: cornsilk;
+    border: solid 3px darkblue;
+    border-collapse: collapse;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+heading {
+    display: table-caption;
+    caption-side: top;
+    font-family: Verdana;
+    font-weight: bold;
+    font-size: 30px;
+    background-color: blue;
+    color: yellow;
+    text-align: center;
+    padding: 10px;
+}
+
+apartment {
+    display: table-row;
+}
+
+apartment:hover {
+    background-color: #ddd;
+}
+
+city {
+    display: table-cell;
+    color: darkblue;
+    font-size: 14pt;
+    font-weight: bold;
+    border: solid 3px darkblue;
+    width: 120px;
+}
+
+address,
+name {
+    display: none;
+}
+
+price {
+    display: table-cell;
+    color: navy;
+    font-weight: bold;
+    border: solid 3px darkblue;
+    width: 80px;
+}
+
+phone {
+    display: table-cell;
+    color: darkgreen;
+    border: solid 3px darkblue;
+    width: 120px;
+}
+
+year {
+    display: table-cell;
+    color: red;
+    font-weight: bold;
+    border: solid 3px darkblue;
+    width: 60px;
+}
+
+photo {
+    display: table-cell;
+    border: solid 3px darkblue;
+    width: 100px;
+    height: auto;
+}

@@ -1,0 +1,42 @@
+heading { 
+	display:block;
+	margin:0.5em;
+	font-family: Verdana;
+	font-weight: bolder;
+	text-align:center;
+	font-size:30px;
+	background-color: blue;
+	color: yellow;
+}
+
+apartment {
+	display:list-item;
+	margin-bottom:15px;
+	margin-left:20px;
+}
+
+apartment city {
+	color:darkblue;
+	font-size:14pt;
+	margin-left:20px;
+}
+
+apartment price {
+	color:darkred; 
+	margin-left:30px;
+	font-size:14pt;
+}
+
+address, name, phone {
+	display:none;
+}
+
+apartments {background:cornsilk;display:block;margin-left:15px;}
+
+apartment:after {
+	content:attr(year);
+	margin-left:20px;
+	color:darkorange;
+}
+
+

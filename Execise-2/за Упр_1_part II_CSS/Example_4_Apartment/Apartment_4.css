@@ -1,0 +1,63 @@
+heading { 
+    display: block;
+    margin: 0.5em;
+    font-family: Verdana;
+    font-weight: bold;
+    text-align: center;
+    font-size: 30px;
+    background: blue;
+    color: yellow;
+}
+
+apartments {
+    display: block;
+    background: cornsilk;
+    width: 100%;
+    padding: 10px;
+}
+
+apartment {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+    padding: 10px 20px;
+    border-bottom: 1px solid #aaa;
+}
+
+apartment::before {
+    content: attr(id);
+    color: darkorange;
+    font-weight: bold;
+}
+
+apartment::after {
+    content: attr(year);
+    color: darkorange;
+    font-weight: bold;
+}
+
+apartment city,
+apartment address,
+apartment price,
+name,
+phone {
+    display: inline-block;
+    font-size: 14pt;
+    white-space: nowrap;
+}
+
+apartment city,
+apartment address {
+    color: blue;
+}
+
+apartment price {
+    color: darkblue;
+    font-weight: bold;
+}
+
+name,
+phone {
+    color: darkgreen;
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="Apartment_3.css"?>
+<apartments>
+  <heading>Real Estate Agency</heading>
+   <apartment id="101" year="2024">
+      <city>Sofia</city>
+      <address> Sveta Nedelya Sq. 4, fl. 6 </address>
+      <price>75000</price>
+      <name>Ivan Ivanov</name>
+      <phone>+359888123456</phone>
+   </apartment>
+
+   <apartment id="102" year="2022">
+      <city>Varna</city>
+      <address> Tsar Osvoboditel Blvd. 66, fl. 2 </address>
+      <price>50000</price>
+      <name>Ivan Ivanov</name>
+      <phone>+359888123456</phone>
+   </apartment>
+</apartments>

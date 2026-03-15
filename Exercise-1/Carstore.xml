@@ -1,155 +1,163 @@
 <?xml version="1.0" ?>
-<Carstore>
-    <Dealership location="BG">
-        <Name>Индиго</Name>
-        <Manager>Мартин</Manager>
-        <Contacts>
-            <Phone>095898549594</Phone>
-            <Email>m.marinov17@gmail.com</Email>
-        </Contacts>
-        <Address>ул. Улична 17</Address>
-        <Website link="https://www.astonmartin.com/en">indigo.com</Website>
-        <Annotation>BG</Annotation>
-        <Category>
-            <Car>
-                <CarId type="sport" rating="9">
-                    <Brand>Aston Martin</Brand>
-                    <Model>Vulcan</Model>
-                    <Year>2025</Year>
-                    <Price currency="$">1 200 000</Price>
-                    <Color>Лилав</Color>
+<?xml-stylesheet type="text/css" href="Carstore.css"?>
+<carstore>
+    <dealership location="BG">
+        <name>Индиго</name>
+        <manager>Мартин</manager>
+        <contacts>
+            <phone>095898549594</phone>
+            <email>m.marinov17@gmail.com</email>
+        </contacts>
+        <address>ул. Улична 17</address>
+        <website link="https://www.astonmartin.com/en">indigo.com</website>
+        <annotation>BG</annotation>
+
+        <category>
+            <car>
+                <car-id type="sport" rating="9">
+                    <brand>Aston Martin</brand>
+                    <model>Vulcan</model>
+                    <year>2025</year>
+                    <price currency="$">1 200 000</price>
+                    <color>Лилав</color>
                     <km>1172</km>
                     <power unit="hp">790</power>
-                    <FuelType>бензин</FuelType>
-                    <Transmission>Ръчна</Transmission>
-                    <Condition>Използван</Condition>
-                    <Annotation lang="BG">BG</Annotation>
-                    <Images>
-                        <Image>images/aston-martin/vulcan-1.jpg</Image>
-                        <Image>images/aston-martin/vulcan-2.jpg</Image>
-                        <Image>images/aston-martin/vulcan-3.jpg</Image>
-                    </Images>
-                    <Link href="https://www.astonmartin.com/en">Aston Martin</Link>
-                </CarId>
-                <CarId>
-                    <Brand>Aston Martin</Brand>
-                    <Model>Vulcan</Model>
-                    <Year>2025</Year>
-                    <Price currency="$">400 000</Price>
-                    <Color>Черен</Color>
+                    <fuel-type>бензин</fuel-type>
+                    <transmission>Ръчна</transmission>
+                    <condition>Използван</condition>
+                    <annotation lang="BG">BG</annotation>
+                    <images>
+                        <image>images/aston-martin/vulcan-1.jpg</image>
+                        <image>images/aston-martin/vulcan-2.jpg</image>
+                        <image>images/aston-martin/vulcan-3.jpg</image>
+                    </images>
+                    <link href="https://www.astonmartin.com/en">Aston Martin</link>
+                </car-id>
+
+                <car-id type="sport">
+                    <brand>Aston Martin</brand>
+                    <model>Vulcan</model>
+                    <year>2025</year>
+                    <price currency="$">400 000</price>
+                    <color>Черен</color>
                     <km>117</km>
                     <power unit="hp">550</power>
-                    <FuelType>бензин</FuelType>
-                    <Transmission>Ръчна</Transmission>
-                    <Condition>Нов</Condition>
-                    <Annotation lang="BG">BG</Annotation>
-                    <Images>
-                        <Image>images/aston-martin/vulcan-1.jpg</Image>
-                        <Image>images/aston-martin/vulcan-2.jpg</Image>
-                        <Image>images/aston-martin/vulcan-4.jpg</Image>
-                    </Images>
-                    <Link href="https://www.astonmartin.com/en">Aston Martin</Link>
-                </CarId>
-                <CarId>
-                    <Brand>Maserati</Brand>
-                    <Model>MC20</Model>
-                    <Year>2024</Year>
-                    <Price currency="$">250 000</Price>
-                    <Color>Бял</Color>
+                    <fuel-type>бензин</fuel-type>
+                    <transmission>Ръчна</transmission>
+                    <condition>Нов</condition>
+                    <annotation lang="BG">BG</annotation>
+                    <images>
+                        <image>images/aston-martin/vulcan-1.jpg</image>
+                        <image>images/aston-martin/vulcan-2.jpg</image>
+                        <image>images/aston-martin/vulcan-4.jpg</image>
+                    </images>
+                    <link href="https://www.astonmartin.com/en">Aston Martin</link>
+                </car-id>
+
+                <car-id type="luxury">
+                    <brand>Maserati</brand>
+                    <model>MC20</model>
+                    <year>2024</year>
+                    <price currency="$">250 000</price>
+                    <color>Бял</color>
                     <km>11 347</km>
                     <power unit="hp">750</power>
-                    <FuelType>бензин</FuelType>
-                    <Transmission>Ръчна</Transmission>
-                    <Condition>Използван</Condition>
-                    <Annotation lang="BG">BG</Annotation>
-                    <Images>
-                        <Image>images/maserati/mc20-1.jpg</Image>
-                        <Image>images/maserati/mc20-2.jpg</Image>
-                        <Image>images/maserati/mc20-3.jpg</Image>
-                    </Images>
-                    <Link href="https://www.maserati.com/bg/bg/dealers/autoitalia">Maserati</Link>
-                </CarId>
-            </Car>
-            <Truck>
-                <TruckId>
-                    <Brand>Mercedes</Brand>
-                    <Model>eActros 600</Model>
-                    <Year>2024</Year>
-                    <Price currency="$">300 000</Price>
-                    <Color>Сив</Color>
+                    <fuel-type>бензин</fuel-type>
+                    <transmission>Ръчна</transmission>
+                    <condition>Използван</condition>
+                    <annotation lang="BG">BG</annotation>
+                    <images>
+                        <image>images/maserati/mc20-1.jpg</image>
+                        <image>images/maserati/mc20-2.jpg</image>
+                        <image>images/maserati/mc20-3.jpg</image>
+                    </images>
+                    <link href="https://www.maserati.com/bg/bg/dealers/autoitalia">Maserati</link>
+                </car-id>
+            </car>
+
+            <truck>
+                <truck-id type="luxury">
+                    <brand>Mercedes</brand>
+                    <model>eActros 600</model>
+                    <year>2024</year>
+                    <price currency="$">300 000</price>
+                    <color>Сив</color>
                     <km>110 383</km>
                     <power unit="hp">450</power>
-                    <FuelType>бензин</FuelType>
-                    <Transmission>Ръчна</Transmission>
-                    <Condition>Използван</Condition>
-                    <Annotation lang="BG">BG</Annotation>
-                    <Images>
-                        <Image>images/mercedes/e-1.webp</Image>
-                        <Image>images/mercedes/e-2.jpg</Image>
-                        <Image>images/mercedes/e-3.webp</Image>
-                    </Images>
-                    <Link href="https://www.mercedes-benz.bg/">Mercedes</Link>
-                </TruckId>
-                <TruckId>
-                    <Brand>Renault</Brand>
-                    <Model>E-Tech T</Model>
-                    <Year>2025</Year>
-                    <Price currency="$">340 000</Price>
-                    <Color>Сив</Color>
+                    <fuel-type>бензин</fuel-type>
+                    <transmission>Ръчна</transmission>
+                    <condition>Използван</condition>
+                    <annotation lang="BG">BG</annotation>
+                    <images>
+                        <image>images/mercedes/e-1.webp</image>
+                        <image>images/mercedes/e-2.jpg</image>
+                        <image>images/mercedes/e-3.webp</image>
+                    </images>
+                    <link href="https://www.mercedes-benz.bg/">Mercedes</link>
+                </truck-id>
+
+                <truck-id type="electric">
+                    <brand>Renault</brand>
+                    <model>E-Tech T</model>
+                    <year>2025</year>
+                    <price currency="$">340 000</price>
+                    <color>Сив</color>
                     <km>250 000</km>
                     <power unit="hp">550</power>
-                    <FuelType>бензин</FuelType>
-                    <Transmission>Ръчна</Transmission>
-                    <Condition>Използван</Condition>
-                    <Annotation lang="BG">BG</Annotation>
-                    <Images>
-                        <Image>images/renault/t-1.jpg</Image>
-                        <Image>images/renault/t-2.jpg</Image>
-                        <Image>images/renault/t-3.jpg</Image>
-                    </Images>
-                    <Link href="https://www.renault.bg/">Renault</Link>
-                </TruckId>
-            </Truck>
-            <Moto>
-                <MotoId>
-                    <Brand>Kawazaki</Brand>
-                    <Model>Ninja</Model>
-                    <Year>2025</Year>
-                    <Price currency="$">75 000</Price>
-                    <Color>Зелен</Color>
+                    <fuel-type>бензин</fuel-type>
+                    <transmission>Ръчна</transmission>
+                    <condition>Използван</condition>
+                    <annotation lang="BG">BG</annotation>
+                    <images>
+                        <image>images/renault/t-1.jpg</image>
+                        <image>images/renault/t-2.jpg</image>
+                        <image>images/renault/t-3.jpg</image>
+                    </images>
+                    <link href="https://www.renault.bg/">Renault</link>
+                </truck-id>
+            </truck>
+
+            <moto>
+                <moto-id type="sports">
+                    <brand>Kawazaki</brand>
+                    <model>Ninja</model>
+                    <year>2025</year>
+                    <price currency="$">75 000</price>
+                    <color>Зелен</color>
                     <km>20 000</km>
                     <power unit="hp">850</power>
-                    <FuelType>бензин</FuelType>
-                    <Transmission>Ръчна</Transmission>
-                    <Condition>Използван</Condition>
-                    <Annotation lang="BG">BG</Annotation>
-                    <Images>
-                        <Image>images/kawazaki/ninja-1.jpg</Image>
-                        <Image>images/kawazaki/ninja-2.jpg</Image>
-                        <Image>images/kawazaki/ninja-3.jpg</Image>
-                    </Images>
-                    <Link href="https://www.kawasaki.com/en-us/">Kawazaki</Link>
-                </MotoId>
-                <MotoId>
-                    <Brand>Ducati</Brand>
-                    <Model>Streetfighter</Model>
-                    <Year>2022</Year>
-                    <Price currency="$">50 000</Price>
-                    <Color>Червен</Color>
+                    <fuel-type>бензин</fuel-type>
+                    <transmission>Ръчна</transmission>
+                    <condition>Използван</condition>
+                    <annotation lang="BG">BG</annotation>
+                    <images>
+                        <image>images/kawazaki/ninja-1.jpg</image>
+                        <image>images/kawazaki/ninja-2.jpg</image>
+                        <image>images/kawazaki/ninja-3.jpg</image>
+                    </images>
+                    <link href="https://www.kawasaki.com/en-us/">Kawazaki</link>
+                </moto-id>
+
+                <moto-id type="sports">
+                    <brand>Ducati</brand>
+                    <model>Streetfighter</model>
+                    <year>2022</year>
+                    <price currency="$">50 000</price>
+                    <color>Червен</color>
                     <km>34 000</km>
                     <power unit="hp">700</power>
-                    <FuelType>бензин</FuelType>
-                    <Transmission>Ръчна</Transmission>
-                    <Condition>Използван</Condition>
-                    <Annotation lang="BG">BG</Annotation>
-                    <Images>
-                        <Image>images/ducati/ducati-1.jpg</Image>
-                        <Image>images/ducati/ducati-2.jpg</Image>
-                        <Image>images/ducati/ducati-3.jpg</Image>
-                    </Images>
-                    <Link href="https://ducati.bg/">Ducati</Link>
-                </MotoId>
-            </Moto>
-        </Category>
-    </Dealership>
-</Carstore>
+                    <fuel-type>бензин</fuel-type>
+                    <transmission>Ръчна</transmission>
+                    <condition>Използван</condition>
+                    <annotation lang="BG">BG</annotation>
+                    <images>
+                        <image>images/ducati/ducati-1.jpg</image>
+                        <image>images/ducati/ducati-2.jpg</image>
+                        <image>images/ducati/ducati-3.jpg</image>
+                    </images>
+                    <link href="https://ducati.bg/">Ducati</link>
+                </moto-id>
+            </moto>
+        </category>
+    </dealership>
+</carstore>
