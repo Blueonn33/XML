@@ -1,0 +1,124 @@
+* {
+  font-family: Arial, sans-serif;
+  margin-left: 20px;
+}
+
+name,
+manager,
+contacts,
+address,
+website,
+annotation,
+car-id > *,
+truck-id > *,
+moto-id > * {
+  display: none;
+}
+
+car::before {
+  content: "Коли";
+  display: block;
+  font-size: 30px;
+  font-weight: bold;
+}
+truck::before {
+  content: "Камиони";
+  display: block;
+  font-size: 30px;
+  font-weight: bold;
+}
+moto::before {
+  content: "Мотори";
+  display: block;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+car-id[type]::before,
+truck-id[type]::before,
+moto-id[type]::before {
+  content: attr(type);
+  display: inline-block;
+  margin-bottom: 5px;
+  margin-top: 20px;
+}
+car-id,
+truck-id,
+moto-id {
+  display: block;
+  margin-bottom: 30px;
+}
+brand,
+model,
+year {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+price {
+  display: block;
+  margin: 0;
+  margin-bottom: 10px;
+}
+price::after {
+  content: " " attr(currency);
+}
+km,
+fuel-type,
+transmission {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+km {
+  margin-left: 0;
+  display: inline-block;
+}
+power {
+  display: inline-block;
+}
+power::after {
+  content: " " attr(unit);
+}
+category annotation {
+  display: block;
+  margin: 0;
+}
+
+car,
+truck,
+moto {
+  display: block;
+  width: 90%;
+  margin: auto;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 50px;
+}
+car-id,
+truck-id,
+moto-id {
+  display: block;
+  border-radius: 10px;
+  padding: 0px 0px 20px 20px;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+car {
+  background-color: bisque;
+}
+car-id {
+  background-color: whitesmoke;
+}
+truck {
+  background-color: brown;
+  color: white;
+}
+truck-id {
+  background-color: crimson;
+}
+moto {
+  background-color: deepskyblue;
+}
+moto-id {
+  background-color: cornflowerblue;
+  color: white;
+}
