@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<people>
+    <person born="1903" died="1957" class="person-item" place-born="Budapest, Hungary" id="1">
+        <name>John von Neumann
+        </name>
+    </person>
+    <person born="1941" died="2011" class="person-item" place-born="New York, USA" id="2">
+        <name>Dennis Ritchie
+        </name>
+    </person>
+    <person born="1943" class="person-item" place-born="New Orleans, USA" id="3">
+        <name>Ken Thompson
+        </name>
+        <field>Mathematics
+        </field>
+        <field>Informatics
+        </field>
+    </person>
+</people>

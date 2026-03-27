@@ -1,7 +1,6 @@
-/* представяне на данните в табличен вид:  type, Brand, Model, Year, Price, km, FuelType, image; */
+/* представяне на данните в табличен вид:  type, Brand, Model, Year, Price, km, FuelType, image; */
 * {
   font-family: Arial, sans-serif;
-  margin-left: 20px;
 }
 
 name,
@@ -15,65 +14,97 @@ truck-id > *,
 moto-id > * {
   display: none;
 }
+
 car::before {
   content: "Коли";
   display: block;
+  text-align: center;
   font-size: 30px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   padding-top: 20px;
-  padding-left: 20px;
 }
 truck::before {
   content: "Камиони";
   display: block;
+  text-align: center;
   font-size: 30px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   padding-top: 20px;
-  padding-left: 20px;
 }
 moto::before {
   content: "Мотори";
   display: block;
+  text-align: center;
   font-size: 30px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   padding-top: 20px;
-  padding-left: 20px;
 }
+
 car-id[type]::before,
 truck-id[type]::before,
 moto-id[type]::before {
   content: attr(type);
   display: table-cell;
-  margin-bottom: 5px;
-  margin-top: 20px;
   border: 3px solid black;
-  padding: 10px;
+  padding: 10px 14px;
+  vertical-align: middle;
+  text-align: center;
+  font-weight: bold;
+  white-space: nowrap;
 }
+
 car,
 truck,
 moto {
   display: table;
+  width: 92%;
+  margin: 0 auto 30px auto;
   border: 3px solid black;
   border-collapse: collapse;
-  margin-bottom: 20px;
 }
+
 car-id,
 truck-id,
 moto-id {
   display: table-row;
-  border: 3px solid black;
 }
+
 brand,
 model,
 year,
 price,
 km,
-fuel-type,
+fuel-type {
+  display: table-cell;
+  border: 3px solid black;
+  padding: 10px 14px;
+  vertical-align: middle;
+  text-align: center;
+  white-space: nowrap;
+}
+
 image {
   display: table-cell;
   border: 3px solid black;
-  padding: 10px;
+  padding: 6px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+image img {
+  width: 90px;
+  height: 65px;
+  object-fit: cover;
+  display: block;
+}
+
+link {
+  display: table-cell;
+  border: 3px solid black;
+  padding: 10px 14px;
+  vertical-align: middle;
+  text-align: center;
 }

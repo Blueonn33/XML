@@ -1,5 +1,6 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/css" href="Carstore3.css"?>
+
 <carstore>
     <dealership location="BG">
         <name>Индиго</name>
@@ -27,7 +28,7 @@
                     <condition>Използван</condition>
                     <annotation lang="BG">BG</annotation>
                     <image xmlns:html="http://www.w3.org/1999/xhtml">
-                        <html:img src="images/aston-martin/vulcan-1.jpg" />
+                        <html:img src="images/1.jpeg" />
                     </image>
                     <link xmlns:html="http://www.w3.org/1999/xhtml">
                         <html:a href="https://www.astonmartin.com/en">Aston Martin</html:a>
@@ -47,7 +48,7 @@
                     <condition>Нов</condition>
                     <annotation lang="BG">BG</annotation>
                     <image xmlns:html="http://www.w3.org/1999/xhtml">
-                        <html:img src="images/aston-martin/vulcan-2.jpg" />
+                        <html:img src="images/2.jpeg" />
                     </image>
                     <link xmlns:html="http://www.w3.org/1999/xhtml">
                         <html:a href="https://www.astonmartin.com/en">Aston Martin</html:a>
@@ -67,7 +68,7 @@
                     <condition>Използван</condition>
                     <annotation lang="BG">BG</annotation>
                     <image xmlns:html="http://www.w3.org/1999/xhtml">
-                        <html:img src="images/maserati/mc20-1.jpg" />
+                        <html:img src="images/3.jpeg" />
                     </image>
                     <link xmlns:html="http://www.w3.org/1999/xhtml">
                         <html:a href="https://www.maserati.com/bg/bg/dealers/autoitalia">Maserati</html:a>
@@ -89,7 +90,7 @@
                     <condition>Използван</condition>
                     <annotation lang="BG">BG</annotation>
                     <image xmlns:html="http://www.w3.org/1999/xhtml">
-                        <html:img src="images/mercedes/e-1.webp" />
+                        <html:img src="images/1.jpeg" />
                     </image>
                     <link xmlns:html="http://www.w3.org/1999/xhtml">
                         <html:a href="https://www.mercedes-benz.bg/">Mercedes</html:a>
@@ -109,7 +110,7 @@
                     <condition>Използван</condition>
                     <annotation lang="BG">BG</annotation>
                     <image xmlns:html="http://www.w3.org/1999/xhtml">
-                        <html:img src="images/renault/t-1.jpg" />
+                        <html:img src="images/2.jpeg" />
                     </image>
                     <link xmlns:html="http://www.w3.org/1999/xhtml">
                         <html:a href="https://www.renault.bg/">Renault</html:a>
@@ -131,7 +132,7 @@
                     <condition>Използван</condition>
                     <annotation lang="BG">BG</annotation>
                     <image xmlns:html="http://www.w3.org/1999/xhtml">
-                        <html:img src="images/kawazaki/ninja-1.jpg" />
+                        <html:img src="images/1.jpeg" />
                     </image>
                     <link xmlns:html="http://www.w3.org/1999/xhtml">
                         <html:a href="https://www.kawasaki.com/en-us/">Kawazaki</html:a>
@@ -151,7 +152,7 @@
                     <condition>Използван</condition>
                     <annotation lang="BG">BG</annotation>
                     <image xmlns:html="http://www.w3.org/1999/xhtml">
-                        <html:img src="images/ducati/ducati-1.jpg" />
+                        <html:img src="images/2.jpeg" />
                     </image>
                     <link xmlns:html="http://www.w3.org/1999/xhtml">
                         <html:a href="https://ducati.bg/">Ducati</html:a>
