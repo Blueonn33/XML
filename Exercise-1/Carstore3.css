@@ -43,6 +43,19 @@ moto::before {
   padding-top: 20px;
 }
 
+car {
+  margin-top: 50px !important;
+  background-color: rgb(202, 130, 130);
+}
+truck {
+  margin-top: 50px !important;
+  background-color: rgb(130, 202, 162);
+}
+moto {
+  margin-top: 50px !important;
+  background-color: rgb(142, 130, 202);
+}
+
 car-id[type]::before,
 truck-id[type]::before,
 moto-id[type]::before {
@@ -54,6 +67,16 @@ moto-id[type]::before {
   text-align: center;
   font-weight: bold;
   white-space: nowrap;
+}
+
+car-id[type]::before {
+  background-color: rgb(221, 178, 178);
+}
+truck-id[type]::before {
+  background-color: rgb(178, 213, 194);
+}
+moto-id[type]::before {
+  background-color: rgb(173, 164, 220);
 }
 
 car,
@@ -84,6 +107,7 @@ fuel-type {
   vertical-align: middle;
   text-align: center;
   white-space: nowrap;
+  background-color: rgb(225, 225, 225);
 }
 
 image {
@@ -92,13 +116,16 @@ image {
   padding: 6px;
   vertical-align: middle;
   text-align: center;
+  background-color: rgb(225, 225, 225);
 }
 
 image img {
-  width: 90px;
+  width: 100%;
   height: 65px;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
+  background-color: white;
+  border-radius: 20px;
 }
 
 link {
@@ -107,4 +134,5 @@ link {
   padding: 10px 14px;
   vertical-align: middle;
   text-align: center;
+  background-color: rgb(225, 225, 225);
 }
