@@ -1,0 +1,70 @@
+* {
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+dealership {
+  display: block;
+  margin: 20px auto;
+  padding: 20px;
+  width: 600px;
+  background: #f7f7fb;
+  border: 1px solid #d0d0e0;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+dealership::before {
+  content: attr(location) " | " attr(data-name) " | " attr(data-manager);
+  display: block;
+  font-weight: bold;
+  font-size: 20px;
+  color: #2a2a6a;
+  margin-bottom: 12px;
+}
+
+contacts,
+address {
+  display: inline-block;
+  margin-right: 25px;
+  font-size: 15px;
+  color: #333;
+  padding: 10px 12px;
+  background: #e8ecff;
+  border-radius: 6px;
+}
+
+website {
+  display: block;
+  margin-top: 12px;
+  font-size: 15px;
+  padding: 10px 12px;
+  background: #fff4d6;
+  border-radius: 6px;
+}
+
+website a {
+  color: #b36b00;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+website a:hover {
+  text-decoration: underline;
+}
+
+annotation {
+  display: block;
+  margin-top: 12px;
+  font-style: italic;
+  color: #3c3c3c;
+  padding: 8px 12px;
+  background: #f0f0f0;
+  border-radius: 6px;
+}
+
+car-id > *,
+truck-id > *,
+moto-id > * {
+  display: none;
+}

@@ -1,15 +1,18 @@
 <?xml version="1.0" ?>
-<?xml-stylesheet type="text/css" href="Carstore3.css"?>
+<?xml-stylesheet type="text/css" href="Carstore4.css"?>
 <carstore>
-    <dealership location="BG">
-        <name>Индиго</name>
-        <manager>Мартин</manager>
+    <dealership location="България" data-name="Индиго" data-manager="Мартин">
+        <!-- <name>Индиго</name>
+        <manager>Мартин</manager> -->
         <contacts>
             <phone>095898549594</phone>
             <email>m.marinov17@gmail.com</email>
+            <address>ул. Улична 17</address>
         </contacts>
-        <address>ул. Улична 17</address>
-        <website link="https://www.astonmartin.com/en">indigo.com</website>
+        <website xmlns:html="http://www.w3.org/1999/xhtml">
+            <html:a href="https://blueonn33.github.io/martinmarinov/">Indigo.com</html:a>
+        </website>
+        <!-- <website link="https://blueonn33.github.io/martinmarinov/">Indigo.com</website> -->
         <annotation>BG</annotation>
 
         <category>
