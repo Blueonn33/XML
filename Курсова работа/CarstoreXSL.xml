@@ -1,0 +1,168 @@
+<?xml version="1.0" ?>
+<?xml-stylesheet type="text/xsl" href="List.xsl"?>
+<carstore>
+    <dealership location="България" data-name="Индиго" data-manager="Мартин">
+        <!-- <name>Индиго</name>
+        <manager>Мартин</manager> -->
+        <contacts>
+            <phone>095898549594</phone>
+            <email>m.marinov17@gmail.com</email>
+            <address>ул. Улична 17</address>
+        </contacts>
+        <website xmlns:html="http://www.w3.org/1999/xhtml">
+            <html:a href="https://blueonn33.github.io/martinmarinov/">Indigo.com</html:a>
+        </website>
+        <!-- <website link="https://blueonn33.github.io/martinmarinov/">Indigo.com</website> -->
+        <annotation>BG</annotation>
+
+        <category>
+            <car>
+                <car-id type="SUV" rating="10">
+                    <brand>Aston Martin</brand>
+                    <model>Vulcan</model>
+                    <year>2025</year>
+                    <price currency="$">1200000</price>
+                    <color>Лилав</color>
+                    <km>1172</km>
+                    <power unit="hp">790</power>
+                    <fuel-type>бензин</fuel-type>
+                    <transmission>Ръчна</transmission>
+                    <condition>Използван</condition>
+                    <annotation lang="BG">BG</annotation>
+                    <image xmlns:html="http://www.w3.org/1999/xhtml">
+                        <html:img src="images/aston-martin/vulcan-1.jpg" />
+                        <html:img src="images/aston-martin/vulcan-2.jpg" />
+                    </image>
+                    <link xmlns:html="http://www.w3.org/1999/xhtml">
+                        <html:a href="https://www.astonmartin.com/en">Aston Martin</html:a>
+                    </link>
+                </car-id>
+
+                <car-id type="Sport" rating="9">
+                    <brand>Aston Martin</brand>
+                    <model>Vulcan</model>
+                    <year>2025</year>
+                    <price currency="$">400000</price>
+                    <color>Черен</color>
+                    <km>117</km>
+                    <power unit="hp">550</power>
+                    <fuel-type>бензин</fuel-type>
+                    <transmission>Ръчна</transmission>
+                    <condition>Нов</condition>
+                    <annotation lang="BG">BG</annotation>
+                    <image xmlns:html="http://www.w3.org/1999/xhtml">
+                        <html:img src="images/aston-martin/vulcan-3.jpg" />
+                        <html:img src="images/aston-martin/vulcan-2.jpg" />
+                    </image>
+                    <link xmlns:html="http://www.w3.org/1999/xhtml">
+                        <html:a href="https://www.astonmartin.com/en">Aston Martin</html:a>
+                    </link>
+                </car-id>
+
+                <car-id type="SUV" rating="8">
+                    <brand>Maserati</brand>
+                    <model>MC20</model>
+                    <year>2024</year>
+                    <price currency="$">190000</price>
+                    <color>Бял</color>
+                    <km>11347</km>
+                    <power unit="hp">750</power>
+                    <fuel-type>бензин</fuel-type>
+                    <transmission>Ръчна</transmission>
+                    <condition>Използван</condition>
+                    <annotation lang="BG">BG</annotation>
+                    <image xmlns:html="http://www.w3.org/1999/xhtml">
+                        <html:img src="images/maserati/mc20-1.jpg" />
+                    </image>
+                    <link xmlns:html="http://www.w3.org/1999/xhtml">
+                        <html:a href="https://www.maserati.com/bg/bg/dealers/autoitalia">Maserati</html:a>
+                    </link>
+                </car-id>
+            </car>
+
+            <truck>
+                <truck-id type="Luxury">
+                    <brand>Mercedes</brand>
+                    <model>eActros 600</model>
+                    <year>2024</year>
+                    <price currency="$">300000</price>
+                    <color>Сив</color>
+                    <km>110383</km>
+                    <power unit="hp">450</power>
+                    <fuel-type>бензин</fuel-type>
+                    <transmission>Ръчна</transmission>
+                    <condition>Използван</condition>
+                    <annotation lang="BG">BG</annotation>
+                    <image xmlns:html="http://www.w3.org/1999/xhtml">
+                        <html:img src="images/mercedes/e-1.webp" />
+                    </image>
+                    <link xmlns:html="http://www.w3.org/1999/xhtml">
+                        <html:a href="https://www.mercedes-benz.bg/">Mercedes</html:a>
+                    </link>
+                </truck-id>
+
+                <truck-id type="Electric">
+                    <brand>Renault</brand>
+                    <model>E-Tech T</model>
+                    <year>2025</year>
+                    <price currency="$">40000</price>
+                    <color>Сив</color>
+                    <km>17</km>
+                    <power unit="hp">550</power>
+                    <fuel-type>бензин</fuel-type>
+                    <transmission>Ръчна</transmission>
+                    <condition>Нов</condition>
+                    <annotation lang="BG">BG</annotation>
+                    <image xmlns:html="http://www.w3.org/1999/xhtml">
+                        <html:img src="images/renault/t-1.jpg" />
+                    </image>
+                    <link xmlns:html="http://www.w3.org/1999/xhtml">
+                        <html:a href="https://www.renault.bg/">Renault</html:a>
+                    </link>
+                </truck-id>
+            </truck>
+
+            <moto>
+                <moto-id type="Sport">
+                    <brand>Kawazaki</brand>
+                    <model>Ninja</model>
+                    <year>2025</year>
+                    <price currency="$">75000</price>
+                    <color>Зелен</color>
+                    <km>20</km>
+                    <power unit="hp">850</power>
+                    <fuel-type>бензин</fuel-type>
+                    <transmission>Ръчна</transmission>
+                    <condition>Нов</condition>
+                    <annotation lang="BG">BG</annotation>
+                    <image xmlns:html="http://www.w3.org/1999/xhtml">
+                        <html:img src="images/kawazaki/ninja-1.jpg" />
+                    </image>
+                    <link xmlns:html="http://www.w3.org/1999/xhtml">
+                        <html:a href="https://www.kawasaki.com/en-us/">Kawazaki</html:a>
+                    </link>
+                </moto-id>
+
+                <moto-id type="Sport">
+                    <brand>Ducati</brand>
+                    <model>Streetfighter</model>
+                    <year>2022</year>
+                    <price currency="$">50000</price>
+                    <color>Червен</color>
+                    <km>34000</km>
+                    <power unit="hp">700</power>
+                    <fuel-type>бензин</fuel-type>
+                    <transmission>Ръчна</transmission>
+                    <condition>Използван</condition>
+                    <annotation lang="BG">BG</annotation>
+                    <image xmlns:html="http://www.w3.org/1999/xhtml">
+                        <html:img src="images/ducati/ducati-1.jpg" />
+                    </image>
+                    <link xmlns:html="http://www.w3.org/1999/xhtml">
+                        <html:a href="https://ducati.bg/">Ducati</html:a>
+                    </link>
+                </moto-id>
+            </moto>
+        </category>
+    </dealership>
+</carstore>
