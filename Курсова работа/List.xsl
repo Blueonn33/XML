@@ -82,7 +82,6 @@
                     </xsl:for-each>
                 </table>
                 <table>
-                    <!-- за всички автомобили след 2020 г. и цена <= .... : Brand, Model, Year, Price, km, power, FuelType; -->
                     <h2>Автомобили - филтър за година и цена</h2>
                     <tr>
                         <th>Brand</th>
@@ -102,6 +101,32 @@
                             <td><xsl:value-of select="km" /></td>
                             <td><xsl:value-of select="power" /></td>
                             <td><xsl:value-of select="fuel-type" /></td>
+                        </tr>
+                    </xsl:for-each>
+                </table>
+                <table>
+                    <h2>Камиони - цена</h2>
+                    <tr>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Year</th>
+                        <th>Price</th>
+                        <th>km</th>
+                        <th>power</th>
+                        <th>Condition</th>
+                        <th>Annotation</th>
+                    </tr>
+                    <xsl:for-each select="carstore/dealership/category/truck/truck-id">
+                        <xsl:sort select="price" data-type="number" order="ascending"/>
+                        <tr>
+                            <td><xsl:value-of select="brand" /></td>
+                            <td><xsl:value-of select="model" /></td>
+                            <td><xsl:value-of select="year" /></td>
+                            <td><xsl:value-of select="price" /></td>
+                            <td><xsl:value-of select="km" /></td>
+                            <td><xsl:value-of select="power" /></td>
+                            <td><xsl:value-of select="condition" /></td>
+                            <td><xsl:value-of select="annotation" /></td>
                         </tr>
                     </xsl:for-each>
                 </table>
