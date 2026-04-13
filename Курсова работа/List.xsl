@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0"
-                xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet 
+    version="1.0"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:html="http://www.w3.org/1999/xhtml">
     <xsl:template match="/">
         <html>
             <body>
@@ -21,7 +23,7 @@
                         <td><xsl:value-of select="carstore/dealership/contacts/phone"/></td>
                         <td><xsl:value-of select="carstore/dealership/contacts/email"/></td>
                         <td><xsl:value-of select="carstore/dealership/contacts/address"/></td>
-                        <td><xsl:value-of select="carstore/dealership/website/a"/></td>
+                        <td><xsl:value-of select="carstore/dealership/website/html:a/@href"/></td>
                         <td><xsl:value-of select="carstore/dealership/annotation"/></td>
                     </tr>
                 </table>
@@ -127,6 +129,34 @@
                             <td><xsl:value-of select="power" /></td>
                             <td><xsl:value-of select="condition" /></td>
                             <td><xsl:value-of select="annotation" /></td>
+                        </tr>
+                    </xsl:for-each>
+                </table>
+                <table>
+                    <!-- за най-новите автомобили, камиони и мотори: Brand, Model, Year, Price, km, power,Annotation, image; -->
+                    <h2>Нови автомобили, камиони, мотори</h2>
+                    <tr>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Year</th>
+                        <th>Price</th>
+                        <th>km</th>
+                        <th>power</th>
+                        <th>Annotation</th>
+                        <th>Image</th>
+                    </tr>
+                    <xsl:for-each select="carstore/dealership/category/truck/truck-id">
+                        <tr>
+                            <td><xsl:value-of select="brand" /></td>
+                            <td><xsl:value-of select="model" /></td>
+                            <td><xsl:value-of select="year" /></td>
+                            <td><xsl:value-of select="price" /></td>
+                            <td><xsl:value-of select="km" /></td>
+                            <td><xsl:value-of select="power" /></td>
+                            <td><xsl:value-of select="annotation" /></td>
+                            <td>
+                                <img src="{image/html:img/@src}" alt="truck image" width="80" height="auto"/>
+                            </td>
                         </tr>
                     </xsl:for-each>
                 </table>
