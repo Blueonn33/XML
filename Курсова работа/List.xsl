@@ -13,9 +13,21 @@
                     table {
                         margin-bottom: 40px;
                         text-align: center;
+                        display: block;
+                    }
+                    table::after {
+                        content: "";
+                        display: block;
+                        width: 100%;
+                        height: 4px;
+                        background: #431264;
+                        margin-top: 15px;
                     }
                     td {
                         padding-right: 20px;
+                    }
+                    h2 {
+                        color: #431264;
                     }
                 </style>
             </head>
@@ -159,7 +171,11 @@
                         <th>Annotation</th>
                         <th>Image</th>
                     </tr>
-                    <xsl:for-each select="carstore/dealership/category/truck/truck-id">
+                    <xsl:for-each select="
+                                    carstore/dealership/category/car/car-id[year &gt;= 2025] |
+                                    carstore/dealership/category/truck/truck-id[year &gt;= 2025] |
+                                    carstore/dealership/category/moto/moto-id[year &gt;= 2025]
+                                    ">
                         <tr>
                             <td><xsl:value-of select="brand" /></td>
                             <td><xsl:value-of select="model" /></td>
@@ -169,7 +185,7 @@
                             <td><xsl:value-of select="power" /></td>
                             <td><xsl:value-of select="annotation" /></td>
                             <td>
-                                <img src="{image/html:img/@src}" alt="truck image" width="80" height="auto"/>
+                                <img src="{image/html:img/@src}" alt="vehicle image" width="80"/>
                             </td>
                         </tr>
                     </xsl:for-each>
