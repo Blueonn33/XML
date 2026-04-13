@@ -5,6 +5,20 @@
     xmlns:html="http://www.w3.org/1999/xhtml">
     <xsl:template match="/">
         <html>
+            <head>
+                <style>
+                    th{
+                        padding: 20px;
+                    }
+                    table {
+                        margin-bottom: 40px;
+                        text-align: center;
+                    }
+                    td {
+                        padding-right: 20px;
+                    }
+                </style>
+            </head>
             <body>
                 <table>
                     <h2>Магазин</h2>
