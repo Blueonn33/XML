@@ -399,4 +399,162 @@ body="Don't forget me this weekend!">
 </messages>
 ```
 
-#
+# XML Namespaces (пространства от имена)
+
+Пространствата от имена предоставят метод за избягване на конфликти в имената на елементите
+
+## Конфликти на имена
+
+Имената на елементите се дефинират от програмиста. Това често води до конфликт при опит за смесване на XML документи от различни XML приложения.
+
+Този XML съдържа информация от HTML таблица
+
+```xml
+<table>
+  <tr>
+    <td>Apples</td>
+    <td>Bananas</td>
+  </tr>
+</table>
+```
+
+Този файл съдържа информация за маса
+
+```xml
+<table>
+  <name>African Coffee Table</name>
+  <width>80</width>
+  <length>120</length>
+</table>
+```
+
+Ако XML фрагментите бъдат събрани, ще има конфликт на имената. И двата съдържат елемент table, но елементите имат различно съдържание и значение
+
+## Решаване на конфликт на имена чрез префикс
+
+Конфликтите се избягват с помощта на префикс. Този XML съдържа информация за HTML таблица и маса
+
+```xml
+<h:table>
+    <h:tr>
+        <h:td>Apples</h:td>
+        <h:td>Bananas</h:td>
+    </h:tr> 
+</h:table> 
+
+<f:table>
+    <f:name>African Coffee Table</f:name>
+    <f:width>80</f:width>
+    <f:length>120</f:length>
+</f:table>
+```
+
+## XML пространства от имена - атрибутът xmlns
+
+Когато се използват префикси в XML, трябва да се дефинира пространство от имена за префикса. Пространството може да бъде дефинирано чрез атрибута **xmlns** в началния таг на елемент. 
+
+Декларацията на пространство от имена има следния синтаксис 
+
+xmlns: prefix = "URI"
+
+```xml
+<root>
+
+<h:table xmlns:h="http://www.w3.org/TR/html4/">
+  <h:tr>
+    <h:td>Apples</h:td>
+    <h:td>Bananas</h:td>
+  </h:tr>
+</h:table>
+
+<f:table xmlns:f="https://www.w3schools.com/furniture">
+  <f:name>African Coffee Table</f:name>
+  <f:width>80</f:width>
+  <f:length>120</f:length>
+</f:table>
+
+</root>
+```
+
+Когато за даден елемент е дефинирано пространство от имена, всички дъщерни елементи със същия префикс се асоциират със същото пространство от имена. Пространствата от имена могат да бъдат декларирани и в коренния елемент на XML
+
+```xml
+<root xmlns:h="http://www.w3.org/TR/html4/"
+xmlns:f="https://www.w3schools.com/furniture">
+
+<h:table>
+  <h:tr>
+    <h:td>Apples</h:td>
+    <h:td>Bananas</h:td>
+  </h:tr>
+</h:table>
+
+<f:table>
+  <f:name>African Coffee Table</f:name>
+  <f:width>80</f:width>
+  <f:length>120</f:length>
+</f:table>
+
+</root>
+```
+
+:::note
+URI адресът на пространството от имена не се използва от парсера за търсене на информация. Целта на използването на URI е да се даде уникално име на пространството от имена. 
+:::
+
+## URI - унифициран идентификатор на ресурс
+
+Това е низ от знаци, който идентифицира интернет ресурс. Най-разпространеният URI и URL (унифициран локатор на ресурс), който идентифицира адрес на интернет домейн. Друг URI е URN (унифицирано име на ресурс)
+
+## Пространства от имена по подразбиране
+
+Дефинирането на пространство от имена по подразбиране за даден елемент ни спестява използването на префикси във всички дъщерни елементи
+
+xmlns="namespaceURI"
+
+```xml
+<table xmlns="http://www.w3.org/TR/html4/">
+  <tr>
+    <td>Apples</td>
+    <td>Bananas</td>
+  </tr>
+</table>
+
+<table xmlns="https://www.w3schools.com/furniture">
+  <name>African Coffee Table</name>
+  <width>80</width>
+  <length>120</length>
+</table>
+```
+
+## Реална употреба на пространства от имена
+
+XSLT е език, който може да се използва за преобразуване на XML документи в други формати. XML документът по-долу е документ, използван за преобразуване на XML в HTML. Именуването „http://www.w3.org/1999/XSL/Transform“ идентифицира XSLT елементи в HTML документ
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:template match="/">
+<html>
+<body>
+  <h2>My CD Collection</h2>
+  <table border="1">
+    <tr>
+      <th style="text-align:left">Title</th>
+      <th style="text-align:left">Artist</th>
+    </tr>
+    <xsl:for-each select="catalog/cd">
+    <tr>
+      <td><xsl:value-of select="title"/></td>
+      <td><xsl:value-of select="artist"/></td>
+    </tr>
+    </xsl:for-each>
+  </table>
+</body>
+</html>
+</xsl:template>
+
+</xsl:stylesheet>
+```
