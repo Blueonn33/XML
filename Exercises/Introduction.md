@@ -818,3 +818,59 @@ XPath изразите могат да се използват в JavaScript, Ja
 | //title[@lang='en'] | Избира всички елементи title, които имат атрибут lang, чиято стойност е 'en' |
 | /bookstore/book[price>35.00] | Избира всеки елемент book с цена > 35 |
 | /bookstore/book[price &gt; 35.00]/title | Взема заглавието на елементите book, чиято цена е > 35 | 
+
+# XML и XSLT
+
+С XSLT можем да трансформираме XML документ в HTML.
+
+## Показване на XML с XSLT
+
+XSLT (eXtensible Stylesheet Language Transformations) е препоръчителният език за стилизиране на XML
+XSLT е по-сложен от CSS. С него могат да се добавят/премахват елементи и атрибути към или от изходния файл. Чрез него могат да се пренареждат и сортират елементи, да се извършват тестове и да се вземат решения за това кои елементи да се скрият и кои да се покажат и много други.
+
+XSLT използва XPath, за да намери информация в XML документ.
+
+## Пример
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<breakfast_menu>
+
+<food>
+<name>Belgian Waffles</name>
+<price>$5.95</price>
+<description>Two of our famous Belgian Waffles with plenty of real maple syrup</description>
+<calories>650</calories>
+</food>
+
+<food>
+<name>Strawberry Belgian Waffles</name>
+<price>$7.95</price>
+<description>Light Belgian waffles covered with strawberries and whipped cream</description>
+<calories>900</calories>
+</food>
+
+</breakfast_menu>
+```
+
+```xslt
+<?xml version="1.0" encoding="UTF-8"?>
+<html xsl:version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <body style="font-family:Arial; font-size:12pt">
+        <xsl:for-each select="breakfast-menu/food">
+            <div style="background-color:teal">
+                <span><xsl:value-of select="name" /> - </span>
+                <xsl:value-of select="price" />
+            </div>
+            <div>
+                <p>
+                    <xsl:value-of select="description" />
+                    <span> (<xsl:value-of select="calories" /> calories per serving)
+                    </span>
+                </p>
+            </div>
+        </xsl:for-each>
+    </body>
+</html>
+``` 
+
