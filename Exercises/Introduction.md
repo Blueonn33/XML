@@ -636,3 +636,57 @@ if (this.readyState == 4 && this.status == 200)
 ```js
 document.getElementById("demo").innerHTML = xhttp.responseText;
 ```
+
+# XML Parser
+
+Всички основни браузъри имат вграден XML парсер за достъп и манипулиране на XML
+
+XML DOM (Document Object Model) определя свойствата и методите за достъп и редактиране на XML. Въпреки това, преди да бъде осъществен достъп до XML документ, той трябва да бъде зареден в XML DOM обект
+
+Браузърите имат парсер, който конвертира текст в XML DOM обект.
+
+## Разбор на текстов низ
+
+Примерът анализира текстов низ в XML DOM обект и извлича информацията от него с JavaScript
+
+```xml
+<html>
+<body>
+
+<p id="demo"></p>
+
+<script>
+var text, parser, xmlDoc;
+
+text = "<bookstore><book>" +
+"<title>Everyday Italian</title>" +
+"<author>Giada De Laurentiis</author>" +
+"<year>2005</year>" +
+"</book></bookstore>";
+
+parser = new DOMParser();
+xmlDoc = parser.parseFromString(text,"text/xml");
+
+document.getElementById("demo").innerHTML =
+xmlDoc.getElementsByTagName("title")[0].childNodes[0].nodeValue;
+</script>
+
+</body>
+</html>
+```
+
+**Everyday Italian**
+
+Дефиниран е текстов низ - text
+Създава се XML DOM parser - parser = new DOMParser();
+Парсерът създава нов XML DOM обект, използвайки текстовия низ:
+
+```js
+xmlDoc = parser.parseFromString(text,"text/xml");
+```
+
+## XMLHttpRequest обект
+
+Той има вграден XML парсер. Свойството **responseText** връща отговора като низ. Свойството **responseXML** връща отговора като XML DOM обект.
+
+# 
