@@ -912,3 +912,173 @@ XQuery 1.0 и XPath 2.0 споделят един и същ модел на да
 ## XQuery е препоръка на W3C
 
 Езикът е съвместим с няколко стандарта на W3C като XML, Namespaces, XSLT, XPath и XML Schema
+
+# XML, XLink и XPointer
+
+## XLink
+
+- XLink се използва за създаване на хипервръзки в XML документи;
+- Всеки елемент в XML документ може да се държи като връзка;
+- С XLink връзките могат да бъдат дефинирани извън свързаните файлове;
+- XLink е препоръка на W3C;
+
+### Поддръжка от браузъра
+
+Няма поддръжка на XLink в XML документи от браузъра. Браузърите поддържат XLinks в SVG.
+
+### Синтаксис на XLink
+
+В HTML елементът <а> дефинира хипервръзката. В XML документите можем да използваме каквито имена искаме за елементите. Следователно е невъзможно браузърите да предвидят кои елементи на връзката ще бъдат извикани.
+
+### Пример
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<homepages xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <homepage xlink:type="simple" xlink:href="https://www.w3schools.com"> Visit W3Schools</homepage>
+    <homepage xlink:type="simple" xlink:href="http://www.w3.org">Visit W3C</homepage>
+
+</homepages>
+```
+
+За да получим достъп до функциите на XLink, трябва да декларираме пространството от имена XLink. 
+
+Атрибутите **xlink:type** и **xlink:href** в елементите homepage идват от пространството от имена XLink
+
+**xlink:type="simple"** създава проста връзка, подобна на HTML (цъкни тук, за да отидеш там)
+
+Атрибутът **xlink:href** указва URL адреса, към който да се свърже.
+
+### Пример
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<bookstore xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <book title="Harry Potter">
+    <description
+    xlink:type="simple"
+    xlink:href="/images/HPotter.gif"
+    xlink:show="new">
+    As his fifth year at Hogwarts School of Witchcraft and
+    Wizardry approaches, 15-year-old Harry Potter is.......
+    </description>
+    </book>
+
+    <book title="XQuery Kick Start">
+    <description
+    xlink:type="simple"
+    xlink:href="/images/XQuery.gif"
+    xlink:show="new">
+    XQuery Kick Start delivers a concise introduction
+    to the XQuery standard.......
+    </description>
+    </book>
+
+</bookstore>
+```
+
+- Именуването XLink е декларирано в началото на документа;
+- **xlink:type="simple"** създава проста връзка;
+- Атрибутът **xlink:href** указва URL адреса, към който да се свърже (изображение);
+- **xlink:show="new"** указва, че връзката трябва да се отвори в нов прозорец;
+
+### Отдалечен достъп
+
+Ако зададем стойността на атрибута **xlink:show** на embed, свързаният ресурс трябва да се обработва вградено в страницата. Това може да е друг XML документ и така бихме могли да изградим йерархия от XML документи.
+
+Чрез **xlink:actute** указваме кога да се появи ресурсът
+
+| Атрибут | Стойност | Описание |
+|---------|----------|----------| 
+| xlink:actuate | onLoad, onRequest, other, none | Дефинира кога свързаният ресурс е прочетен и представен - onLoad ( когато документът зареди, ресурсът се показва ), onRequest ( ресурсът се показва, когато линкът бъде натиснат ) |
+| xlink:href | URL | определя URL-a, който се отваря |
+| xlink:show | embed, new, replace, other, none | Определя къде да се отвори линкът. По подразбиране е replace |
+| xlink:type | simple, extended, locator, arc, resource, title, none | Определя типа на линка |
+
+## XPointer
+
+- Позволява връзките да сочат към конкретни части от XML документ
+- Използва XPath изрази за навигация в XML документа
+- Препоръчан е от W3C
+
+### Поддържане от браузър
+
+Няма поддръжка за XPointer
+
+### Пример
+
+Използване на XPointer заедно с XLink, за да посочим към конкретна част от друг документ
+
+Започваме с целевия XML документ ( този, към който се свързваме )
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dogbreeds>
+
+    <dog breed="Rottweiler" id="Rottweiler">
+    <picture url="https://dog.com/rottweiler.gif" />
+    <history>The Rottweiler's ancestors were probably Roman
+    drover dogs.....</history>
+    <temperament>Confident, bold, alert and imposing, the Rottweiler
+    is a popular choice for its ability to protect....</temperament>
+    </dog>
+
+    <dog breed="FCRetriever" id="FCRetriever">
+    <picture url="https://dog.com/fcretriever.gif" />
+    <history>One of the earliest uses of retrieving dogs was to
+    help fishermen retrieve fish from the water....</history>
+    <temperament>The flat-coated retriever is a sweet, exuberant,
+    lively dog that loves to play and retrieve....</temperament>
+    </dog>
+
+</dogbreeds>
+```
+
+Използва се атрибут id за всеки елемент. Вместо да се свързва с целия документ ( както е при XLink ), XPointer позволява свързване с конкретни части от документа. За връзка с конкретна част от страницата се добавя знак за число ( # ) и израз за XPointer след URL адреса в атрибута **xlink:href**, ето така:
+
+```xml
+xlink:href="https://dog.com/dogbreeds.xml#xpointer(id('Rottweiler'))"
+```
+
+Изразът се отнася до елемента в целевия документ, като стойността нa id е "Rottweiler"
+
+Xpointer позволява и съкратен запис
+
+```xml
+xlink:href="https://dog.com/dogbreeds.xml#Rottweiler"
+```
+
+### Пример
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mydogs xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <mydog>
+        <description>
+        Anton is my favorite dog. He has won a lot of.....
+        </description>
+        <fact xlink:type="simple" xlink:href="https://dog.com/dogbreeds.xml#Rottweiler">
+        Fact about Rottweiler
+        </fact>
+    </mydog>
+
+    <mydog>
+        <description>
+        Pluto is the sweetest dog on earth......
+        </description>
+        <fact xlink:type="simple" xlink:href="https://dog.com/dogbreeds.xml#FCRetriever">
+        Fact about flat-coated Retriever
+        </fact>
+    </mydog>
+
+</mydogs>
+```
+
+#
