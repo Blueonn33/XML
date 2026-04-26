@@ -689,4 +689,56 @@ xmlDoc = parser.parseFromString(text,"text/xml");
 
 Той има вграден XML парсер. Свойството **responseText** връща отговора като низ. Свойството **responseXML** връща отговора като XML DOM обект.
 
-# 
+# XML DOM
+
+## Какво е DOM
+
+Document Object Model определя стандарт за достъп и манипулиране на документи:
+
+> DOM на W3C е платформено и езиково неутрален интерфейс, който позволява на програми и скриптове динамично да осъществяват достъп и да актуализират съдържанието, структурата и стила на документ
+
+HTML DOM дефинира стандартен начин за достъп и манипулиране на HTML документи. Той представя HTML документа като дървовидна структура
+
+XML DOM определя стандартен начин за достъп и манипулиране на XML документи. Той представя XML документа като дървовидна структура.
+
+## HTML DOM
+
+Всички HTML елементи са достъпни чрез DOM
+
+```html
+<h1 id="demo">This is a Heading</h1>
+
+<button type="button"
+onclick="document.getElementById('demo').innerHTML = 'Hello World!'">Click Me!
+</button>
+```
+
+## XML DOM
+
+Всички XML елементи могат да бъдат достъпвани чрез DOM
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<bookstore>
+
+  <book category="cooking">
+    <title lang="en">Everyday Italian</title>
+    <author>Giada De Laurentiis</author>
+    <year>2005</year>
+    <price>30.00</price>
+  </book>
+
+  <book category="children">
+    <title lang="en">Harry Potter</title>
+    <author>J K. Rowling</author>
+    <year>2005</year>
+    <price>29.99</price>
+  </book>
+
+</bookstore>
+```
+
+```js
+var txt = xmlDoc.getElementsByTagName("title")[0].childNodes[0].nodeValue;
+```
+
