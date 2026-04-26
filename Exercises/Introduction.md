@@ -742,3 +742,79 @@ onclick="document.getElementById('demo').innerHTML = 'Hello World!'">Click Me!
 var txt = xmlDoc.getElementsByTagName("title")[0].childNodes[0].nodeValue;
 ```
 
+# XML и XPath
+
+## Какво е XPath
+
+Това е основен елемент в стандарта XSLT. Той може да се използва за навигация през елементи и атрибути в XML документ.
+
+- XPath е синтаксис за дефиниране на части от XML документа;
+- Той използва пътни изрази за навигация в XML документа;
+- Съдържа библиотека от стандартни функции;
+- Основен елемент е в XSLT и XQuery;
+- Препоръчан е от W3C;
+
+## XPath пътни изрази
+
+XPath използва изрази за пътища, за да избира възли или набори от възли в документа. Тези изрази за пътища много приличат на изразите, които виждаме, когато работим с традиционна компютърна файлова система.
+
+XPath изразите могат да се използват в JavaScript, Java, XML Schema, PHP, Python, C, C++ и много други.
+
+## XPath се използва в XSLT
+
+Той е основен елемент в стандарта XSLT
+
+## Пример
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<bookstore>
+
+    <book category="cooking">
+    <title lang="en">Everyday Italian</title>
+    <author>Giada De Laurentiis</author>
+    <year>2005</year>
+    <price>30.00</price>
+    </book>
+
+    <book category="children">
+    <title lang="en">Harry Potter</title>
+    <author>J K. Rowling</author>
+    <year>2005</year>
+    <price>29.99</price>
+    </book>
+
+    <book category="web">
+    <title lang="en">XQuery Kick Start</title>
+    <author>James McGovern</author>
+    <author>Per Bothner</author>
+    <author>Kurt Cagle</author>
+    <author>James Linn</author>
+    <author>Vaidyanathan Nagarajan</author>
+    <year>2003</year>
+    <price>49.99</price>
+    </book>
+
+    <book category="web">
+    <title lang="en">Learning XML</title>
+    <author>Erik T. Ray</author>
+    <year>2003</year>
+    <price>39.95</price>
+    </book>
+
+</bookstore>
+```
+
+В таблицата са изброени XPath изрази и резултата от тях:
+
+| **XPath Израз** | **Резултат** |
+|-----------------|--------------|
+| /bookstore/book[1] | Избира първия елемент book, който е дете на елемента bookstore |
+| /bookstore/book[last()] | Избира последния елемент book |
+| /bookstore/book[last()-1] | Избира предпоследния елемент book |
+| /bookstore/book[position()<3] | Избира първите 2 елемента book |
+| //title[@lang] | Избира всички елементи title, които имат атрибут lang |
+| //title[@lang='en'] | Избира всички елементи title, които имат атрибут lang, чиято стойност е 'en' |
+| /bookstore/book[price>35.00] | Избира всеки елемент book с цена > 35 |
+| /bookstore/book[price &gt; 35.00]/title | Взема заглавието на елементите book, чиято цена е > 35 | 
