@@ -693,4 +693,74 @@ newEle.appendChild(newText);
 xmlDoc.getElementsByTagName("book")[0].appendChild(newEle);
 ```
 
-# 
+# Добавяне на възли
+
+Методът appendChild() добавя дъщерен възел към съществуващ възел. Новият възел се добавя след всички съществуващи дъщерни възли.
+
+:::note
+Използва се insertBefore(), ако позицията на възела е важна
+:::
+
+Кодът създава елемент edition и го добавя след последния дъщерен елемент на първия елемент book
+
+```js
+newEle = xmlDoc.createElement("edition");
+
+xmlDoc.getElementsByTagName("book")[0].appendChild(newEle);
+```
+
+Този код прави същото както по-горе, но новият елемент се добавя със стойност
+
+```js
+newEle = xmlDoc.createElement("edition");
+newText=xmlDoc.createTextNode("first");
+newEle.appendChild(newText);
+
+xmlDoc.getElementsByTagName("book")[0].appendChild(newEle);
+```
+
+## Вмъкване на възел - insertBefore()
+
+Методът insertBefore() вмъква възел преди указан дъщерен възел. Методът е полезен, когато позицията на добавения възел е важна.
+
+```js
+newNode = xmlDoc.createElement("book");
+
+x = xmlDoc.documentElement;
+y = xmlDco.getElementsByTagName("book")[3];
+
+x.insertBefore(newNode, y);
+```
+
+Ако вторият параметър на insertBefore е null, новият възел ще бъде добавен след последния съществуващ дъщерен възел
+
+## Добавяне на нов атрибут
+
+Методът setAttribute() задава стойността на атрибут
+
+```js
+xmlDoc.getElementsByTagName("book")[0].setAttribute("edition", "first");
+```
+
+:::important
+Няма метод addAttribute()
+
+setAttribute() ще създаде нов атрибут, ако атрибутът не съществува
+Ако атрибутът съществува, то setAttribute() ще презапише съществуващата стойност
+:::
+
+## Добавяне на текст към текстов възел - insertData()
+
+Методът insertData() вмъква данни в съществуващ текстов възел.
+Той има 2 параметъра:
+
+- offset - откъде да започне вмъкването на символи (започва от 0)
+- низ - низът за вмъкване
+
+Следният код добавя Easy към текстовия възел на първия елемент title на заредения XML файл
+
+```js
+xmlDoc.getElementsByTagName("title")[0].childNodes[0].insertData(0, "Easy ")
+```
+
+#
