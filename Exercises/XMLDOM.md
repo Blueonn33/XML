@@ -529,4 +529,60 @@ xmlDoc.getElementsByTagName("book")[0].setAttribute("category","food");
 
 xmlDoc.getElementsByTagName("book")[0].getAttributeNode("category").nodeValue = "food";
 
+# XML DOM - премахване на възли
+
+Методът removeChild премахва зададен възел. 
+Методът removeAttribute премахва атрибут
+
+## Премахване на възел на елемент
+
+Когато даден възел бъде премахнат, всички негови дъщерни възли също се премахват. Този код ще премахне първия елемент book
+
+```js
+y = xmlDoc.getElementsByTagName("book")[0];
+
+xmlDoc.documentElement.removeChild(y);
+```
+
+## Премахване на текущия възел
+
+Методът removeChild е единственият начин за премахване на определен възел. След като сте стигнали до възела, който искате да премахнете, е възможно да го премахнете, като използвате свойството parentNode и метода removeChild
+
+```js
+x = xmlDoc.getElementsByTagName("book")[0]
+
+x.parentNode.removeChild(x);
+```
+
+## Премахване на текстов възел
+
+Методът removeChild може да премахва и текстови възли
+
+```js
+x = xmlDoc.getElementsByTagName("title")[0];
+y = x.childNodes[0]; 
+x.removeChild(y);
+```
+
+## Изчистване на текстов възел
+
+Свойството nodeValue може да се използва за промяна на стойността на текстов възел
+
+```js
+xmlDoc.getElementsByTagName("title")[0].childNodes[0].nodeValue = "";
+```
+
+## Премахване на атрибутен възел по име
+
+Методът removeAttribute премахва атрибутен възел по името му.
+
+```js
+x = xmlDoc.getElementsByTagName("book");
+x[0].removeAttribute("category");
+```
+
+## Премахване на атрибутни възли по обект
+
+removeAttributeNode() премахва възел на атрибут, използвайки обекта на възела като параметър
+
 # 
