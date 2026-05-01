@@ -648,5 +648,49 @@ x = xmlDoc.getElementsByTagName("title")[0].childNodes[0];
 x.nodeValue = "Easy";
 ```
 
-#
+# Създаване на възли
 
+Методът createElement() създава нов възел на елемент
+
+```js
+newElement = xmlDoc.createElement("edition");
+
+xmlDoc.getElementsByTagName("book")[0].appendChild(newElement);
+```
+
+## Създаване на атрибутен възел
+
+Методът createAttribute() създава нов атрибутен възел
+
+```js
+newAtt = xmlDoc.createAttribute("edition");
+newAtt.nodeValue = "first";
+
+xmlDoc.getElementsByTagName("title")[0].setAttributeNode(newAtt);
+```
+
+:::note
+Ако атрибутът вече съществува, той се заменя с новия
+:::
+
+## Създаване на атрибут с помощта на setAttribute()
+
+Тъй като методът setAttribute() създава нов атрибут, ако атрибутът не съществува, той може да се използва за създаване на нов атрибут
+
+```js
+xmlDoc.getElementsByTagName("book")[0].setAttribute("edition", "first");
+```
+
+## Създаване на текстов възел
+
+Методът createTextNode() създава нов текстов възел
+
+```js
+newEle = xmlDoc.createElement("edition");
+newText = xmlDoc.createTextNode("first");
+
+newEle.appendChild(newText);
+xmlDoc.getElementsByTagName("book")[0].appendChild(newEle);
+```
+
+# 
