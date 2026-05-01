@@ -585,4 +585,68 @@ x[0].removeAttribute("category");
 
 removeAttributeNode() премахва възел на атрибут, използвайки обекта на възела като параметър
 
-# 
+# Замяна на възли
+
+Методът replaceChild замества даден възел. Свойството nodeValue замества текст в текстов възел.
+
+```js
+xmlDoc = loadXMLDoc("books.xml");
+
+x = xmlDoc.documentElement;
+
+// create a book element, title element and a text node
+newNode = xmlDoc.createElement("book");
+newTitle = xmlDoc.createElement("title");
+newText = xmlDoc.createTextNode("A notebook");
+
+// add the text node to the title node
+newTitle.appendChild(newText);
+
+// add the title node to the book node
+newNode.appendChild(newTitle);
+
+y = xmlDoc.getElementsByTagName("book")[0]
+
+// replace the first book node with the new node
+x.replaceChild(newNode, y);
+```
+
+1. Зареждаме books.xml в xmlDoc
+2. Създаваме нов елементен възел book
+3. Създаваме нов елементен възел title
+4. Създаваме нов текстов възел с текста "A notebook"
+5. Добавяме новия текстов възел към новия елементен възел title
+6. Добавяме новия елементен възел title към новия елементен възел book
+7. Заменяме първия възел на елемента book с новия възел на елемента book
+
+## Замяна на данни в текстов възел
+
+Методът replaceData() се използва за заместване на данни в текстов възел. Той има 3 параметъра:
+- offset - къде да започне заместването на символи. Стойността на offset започва от 0;
+- дължина - колко символа да се заменят;
+- низ - низът за вмъкване;
+
+```js
+xmlDoc = loadXMLDoc("books.xml");
+
+x = xmlDoc.getElementsByTagName("title")[0].childNodes[0];
+
+x.replaceData(0, 8, "Easy");
+```
+
+## Използване на свойството nodeValue
+
+По-лесно е да се заменят данните в текстов възел, като се използва свойството nodeValue;
+
+Кодът заменя стойността на текстовия възел в първия елемент title с Easy
+
+```js
+xmlDoc = loadXMLDoc("books.xml");
+
+x = xmlDoc.getElementsByTagName("title")[0].childNodes[0];
+
+x.nodeValue = "Easy";
+```
+
+#
+
