@@ -775,5 +775,3 @@ newNode = oldDoc.cloneNode(true);
 
 xmlDoc.documentElement.appendChild(newNode);
 ```
-
-# 
