@@ -365,4 +365,75 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   </p>
 </xsl:template>
 
+# XSLT - при клиента
+
+XSLT може да се използва за трансформиране на документа в XHTML в браузъра.
+
+## JavaScript
+
+В предишните секции беше обяснено как XSLT може да се използва за трансформиране на документ от XML в XHTML. Това бе направено, като се добави XSL стил към XML файла и браузърът сам извърши трансформацията
+
+Дори да работи добре, не винаги е желателно да се включва препратка към стил в XML файл (няма да работи в браузър, който не поддържа XSLT)
+
+По-гъвкаво решение е използването на JavaScript за извършване на трансформацията
+
+С помощта на JavaScript може да:
+- Правим тестове, специфични за браузъра;
+- Използваме различни стилове според нуждите на браузъра и потребителя;
+
+Една от целите на дизайна на XSLT беше да направи възможно трансформирането на данни от един формат в друг, поддържайки различни браузъри и различни потребителски нужди
+
+## XML файл и XSL файл
+
+XML документ
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog>
+  <cd>
+    <title>Empire Burlesque</title>
+    <artist>Bob Dylan</artist>
+    <country>USA</country>
+    <company>Columbia</company>
+    <price>10.90</price>
+    <year>1985</year>
+  </cd>
+.
+.
+</catalog>
+```
+
+И придружаващият XSL стил
+
+```xsl
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsl:stylesheet version="1.0"
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:template match="/">
+  <h2>My CD Collection</h2>
+  <table border="1">
+    <tr bgcolor="#9acd32">
+      <th style="text-align:left">Title</th>
+      <th style="text-align:left">Artist</th>
+    </tr>
+    <xsl:for-each select="catalog/cd">
+    <tr>
+      <td><xsl:value-of select="title" /></td>
+      <td><xsl:value-of select="artist" /></td>
+    </tr>
+    </xsl:for-each>
+  </table>
+</xsl:template>
+
+</xsl:stylesheet>
+```
+
+:::important
+XML файлът няма препратка към XSL файл.
+
+Горното изречение показва, че XML файл може да бъде трансформиран с помощта на много различни XSL стилове
+:::
+
 # 
