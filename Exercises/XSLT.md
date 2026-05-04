@@ -448,5 +448,101 @@ XML файлът няма препратка към XSL файл.
 
 Една от целите на XSLT беше да направи възможно трансформирането на данни от един формат в друг на сървър, връщайки четливи данни на всички видове браузъри
 
-# 
+# Редактиране на XML
 
+Даннитер, съхранени в XML файлове, могат да бъдат редактирани от интернет браузър. 
+
+## Отваряне, редактиране и запазване на XML
+
+Ще използваме XSL, за да трансформираме XML документа в HTML формуляр. Стойностите на XML елементите ще бъдат записани в HTML полетата за въвеждане на HTML формуляр. HTML формулярът е редактируем. След редактиране на данните, те ще бъдат изпратени обратно на сървъра и XML файлът ще бъде актуализиран 
+
+### XML файл и XSL файл
+
+XML документ ( tool.xml )
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<tool>
+  <field id="prodName">
+    <value>HAMMER HG2606</value>
+  </field>
+  <field id="prodNo">
+    <value>32456240</value>
+  </field>
+  <field id="price">
+    <value>$30.00</value>
+  </field>
+</tool>
+```
+
+XSL стил ( tool.xsl )
+
+```xsl
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0"
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:template match="/">
+  <html>
+    <body>
+        <form method="post" action="edittool.asp">
+            <h2>Tool Information (edit):</h2>
+            <table border="0">
+                <xsl:for-each select="tool/field">
+                    <tr>
+                        <td><xsl:value-of select="@id"/></td>
+                        <td>
+                            <input type="text">
+                                <xsl:attribute name="id">
+                                    <xsl:value-of select="@id" />
+                                </xsl:attribute>
+                                <xsl:attribute name="name">
+                                    <xsl:value-of select="@id" />
+                                </xsl:attribute>
+                                <xsl:attribute name="value">
+                                    <xsl:value-of select="value" />
+                                </xsl:attribute>
+                            </input>
+                        </td>
+                    </tr>
+                </xsl:for-each>
+            </table>
+            <br />
+            <input type="submit" id="btn_sub" name="btn_sub" value="Submit" />
+            <input type="reset" id="btn_res" name="btn_res" value="Reset" />
+        </form>
+    </body>
+  </html>
+</xsl:template>
+
+</xsl:stylesheet>
+```
+
+XSL файлът преглежда елементите в XML файла и създава по 1 поле за въвеждане за всеки XML елемент *field*. Стойността на атрибута id на XML елемента field се добавя към атрибутите id и name на всяко HTML поле за въвеждане.
+
+Стойността на всеки XML елемент value се добавя към атрибута value на всяко HTML поле за въвеждане. Резултатът е редактируем HTML формуляр, който съдържа стойностите от XML файла
+
+След това имаме втори стил ( tool_updated.xsl ). Това е XSL файлът, който ще се използва за показване на актуализираните XML данни. Този стил няма да доведе до редактируем HTML формуляр, а до статична HTML таблица
+
+```xsl
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:template match="/">
+    <html>
+        <body>
+            <h2>Updated Tool Information:</h2>
+            <table border="1">
+                <xsl:for-each select="tool/field">
+                    <tr>
+                        <td><xsl:value-of select="@id" /></td>
+                        <td><xsl:value-of select="value" /></td>
+                    </tr>
+                </xsl:for-each>
+            </table>
+        </body>
+    </html>
+</xsl:template>
+
+</xsl:stylesheet>
+```
