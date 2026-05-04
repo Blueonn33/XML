@@ -196,3 +196,160 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 # Value-of
 
+Елементът <xsl:value-of> се използва за извличане на стойността на избран възел. Елементът може да се използва за извличане на стойността на XML елемент и добавянето й към изходния поток на трансформацията
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0"
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:template match="/">
+  <html>
+  <body>
+  <h2>My CD Collection</h2>
+  <table border="1">
+    <tr bgcolor="#9acd32">
+      <th>Title</th>
+      <th>Artist</th>
+    </tr>
+    <tr>
+      <td><xsl:value-of select="catalog/cd/title"/></td>
+      <td><xsl:value-of select="catalog/cd/artist"/></td>
+    </tr>
+  </table>
+  </body>
+  </html>
+</xsl:template>
+
+</xsl:stylesheet>
+```
+
+Атрибутът *select* съдържа XPath израз. Изразът работи като навигация във файлова система; наклонената черта / избира поддиректории
+
+В горния пример се копира само един ред данни от XML документа в изхода. За да може да се премине през всеки елемент и да се покажат всичките записи, се използва <xsl:for-each>
+
+# For-each
+
+Елементът <xsl:for-each> позволява извършване на цикли в XSLT. Той се използва за избиране на всеки XML елемент от определен набор от възли.
+
+<xsl:for-each select="catalog/cd">
+    <tr>
+      <td><xsl:value-of select="title"/></td>
+      <td><xsl:value-of select="artist"/></td>
+    </tr>
+</xsl:for-each>
+
+Стойността на атрибута *select* е XPath израз. Изразът работи като навигация във файлова система
+
+## Филтриране на изхода
+
+Можем да филтрираме изхода от XML файла, като добавим критерий към атрибута select в елемента <xsl:for-each>
+
+<xsl:for-each select="catalog/cd[artist='NewJeans']">
+
+Оператори на филтри са:
+- =
+- !=
+- <
+- >
+
+# Sort
+
+Елементът <xsl:sort> се използва за сортиране на изхода. За да сортираме резултата, добавяме елемент <xsl:sort> в елемента <xsl:for-each> в XSL файла
+
+<xsl:for-each select="catalog/cd">
+    <xsl:sort select="artist"/>
+    <tr>
+        <td><xsl:value-of select="title"/></td>
+        <td><xsl:value-of select="artist"/></td>
+    </tr>
+</xsl:for-each>
+
+Атрибутът *select* показва по кой XML елемент да се сортира
+
+# If
+
+Елементът <xsl:if> се използва за извършване на условен тест спрямо съдържанието на XML файла. За да поставим условен if тест спрямо съдържанието на XML файла, добавяме елемент <xsl:if> към XSL документа
+
+<xsl:if test="expression">
+    ... some output if the expression is true ...
+</xsl:if>
+
+## Къде да го поставим
+
+За да добавим условен тест, добавяме елемента <xsl:if> вътре в елемента <xsl:for-each> в XSL файла
+
+<xsl:for-each select="catalog/cd">
+    <xsl:if test="price &gt; 10">
+        <tr>
+            <td><xsl:value-of select="title"/></td>
+            <td><xsl:value-of select="artist"/></td>
+            <td><xsl:value-of select="price"/></td>
+        </tr>
+    </xsl:if>
+</xsl:for-each>
+
+Стойността на задължителния атрибут test съдържа израза, който трябва да бъде оценен. Горният код ще изведе само елементите за заглавие и изпълнител, чиято цена е > 10
+
+# Choose
+
+Елементът <xsl:choose> се използва заедно с <xsl:when> и <xsl:otherwise> за изразяване на множество условни тестове. 
+
+## Синтаксис
+
+```xml
+<xsl:choose>
+    <xsl:when test="expression">
+        ... some output ...
+    </xsl:when>
+    <xsl:otherwise>
+        ... some output ...
+    </xsl:otherwise>
+</xsl:choose>
+```
+
+## Поставяне на условието за избор
+
+За да се вмъкне тест с множество условия в XML файла, се добавят елементите <xsl:choose>, <xsl:when> и <xsl:otherwise> към XSL файла
+
+```xml
+...
+<xsl:for-each select="catalog/cd">
+    <tr>
+        <td><xsl:value-of select="title" /></td>
+        <xsl:choose>
+            <xsl:when test="price &gt; 10">
+                <td bgcolor="#431264"><xsl:value-of select="artist" /></td>
+            </xsl:when>
+            <xsl:otherwise>
+                <td><xsl:value-of select="artist" /></td>
+            </xsl:otherwise>
+        </xsl:choose>
+    </tr>
+</xsl:for-each>
+...
+```
+
+Кодът добавя лилав фон към колоната Artist, когато цената на диска е > 10
+
+Друг пример
+
+```xsl
+...
+<xsl:choose>
+    <xsl:when test="price &gt; 10">
+        <td bgcolor="#593c59">
+        <xsl:value-of select="artist"/></td>
+    </xsl:when>
+    <xsl:when test="price &gt; 9">
+        <td bgcolor="#cccccc">
+        <xsl:value-of select="artist"/></td>
+    </xsl:when>
+    <xsl:otherwise>
+        <td><xsl:value-of select="artist"/></td>
+    </xsl:otherwise>
+</xsl:choose>
+...
+```
+
+# Apply
