@@ -353,3 +353,16 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 ```
 
 # Apply
+
+Елементът <xsl:apply-templates> прилага шаблонно правило към текущия елемент или към дъщерните възли на текущия елемент. 
+
+Ако добавим атрибут *select* към елемента <xsl:apply-templates>, той ще обработи само дъщерните елементи, които съответстват на стойността на атрибута. Можем да използваме атрибута *select*, за да укажем в какъв ред да се обработват дъщерните възли
+
+<xsl:template match="cd">
+  <p>
+    <xsl:apply-templates select="title"/>
+    <xsl:apply-templates select="artist"/>
+  </p>
+</xsl:template>
+
+# 
