@@ -183,4 +183,63 @@ return $x/title
 <title lang="en">Learning XML</title>
 <title lang="en">XQuery Kick Start</title>
 
-#
+# XQuery FLWOR + HTML
+
+## Пример
+
+В примерите по-долу ще се използва документът books.xml
+
+### Представяне на резултата в HTML списък
+
+Имаме следния XQuery FLWOR израз
+
+```js
+for $x in doc("books.xml")/bookstore/book/title
+order by $x
+return $x
+```
+
+Горният израз ще избере всички елементи title, които са деца нa book, които са деца на bookstore и ще върне заглавията по азбучен ред.
+
+Сега искаме да изброим всички заглавия на книги в нашата книжарница в HTML списък. Добаваме тагове <ul> и <li> към израза FLWOR
+
+```html
+<ul>
+{
+    for $x in doc("books.xml")/bookstore/book/title
+    order by $x
+    return <li>{$x}</li>
+}
+</ul>
+```
+
+Резултатът е следният
+<ul>
+    <li><title lang="en">Everyday Italian</title></li>
+    <li><title lang="en">Harry Potter</title></li>
+    <li><title lang="en">Learning XML</title></li>
+    <li><title lang="en">XQuery Kick Start</title></li>
+</ul>
+
+Сега искаме да премахнем елемента title и да покажем само данните вътре в него
+
+```html
+<ul>
+{
+    for $x in doc("books.xml")/bookstore/book/title
+    order by $x
+    return <li>{data($x)}</li>
+}
+</ul>
+```
+
+Резултатът е следния HTML списък
+
+<ul>
+    <li>Everyday Italian</li>
+    <li>Harry Potter</li>
+    <li>Learning XML</li>
+    <li>XQuery Kick Start</li>
+</ul>
+
+# 
