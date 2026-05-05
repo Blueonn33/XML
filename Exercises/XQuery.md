@@ -127,3 +127,60 @@ XQuery по-горе ще извлече следното
   <price>29.99</price>
 </book>
 
+# XQuery FLWOR изрази
+
+FLWOR ( произнася се "flower" ) е акроним за "For, Let, Where, Order By, Return"
+
+- For (За) - избира поредица от възли;
+- Let (Нека) - свързва последователностт с променлива;
+- Where (Kъдето) - филтрира възлите;
+- Order By (Подреди по) - сортира възлите;
+- Return (Върни) - какво да се върне (изчислява се веднъж за всеки възел);
+
+## Пример
+
+Ще използваме документа books.xml от предишната глава.
+
+### Как да изберем възли с FLWOR
+
+Имаме следния израз за път
+
+doc("books.xml")/bookstore/book[price>30]/title
+
+Горният израз ще избере всички елементи title под елементите book, които са под елемента bookstore, чиято стойност е по-висока от 30.
+
+Следният FLWOR израз ще избере точно същото като израз за път по-горе
+
+```js
+for $x in doc("books.xml")/bookstore/book
+where $x/price>30
+return $x/title
+```
+
+Резултатът ще бъде
+<title lang="en">XQuery Kick Start</title>
+<title lang="en">Learning XML</title>
+
+С FLWOR можем да сортираме резултата
+
+```js
+for $x in doc("books.xml")/bookstore/book
+where $x/price>30
+order by $x/title
+return $x/title
+```
+
+Клаузата *for* избира всички елементи book, които са деца на bookstore в променлива, наречена $x
+
+Клаузата *where* избира само елементи от типа book с елемент price със стойност по-голяма от 30
+
+Клаузата *order by* определя реда на сортиране. Ще се сортира по елемента title.
+
+Клаузата за връщане *return* указва какво трябва да се върне. Тук тя ще връща елементите заглавие (title)
+
+Резултатът от горния XQuery израз ще бъде:
+
+<title lang="en">Learning XML</title>
+<title lang="en">XQuery Kick Start</title>
+
+#
