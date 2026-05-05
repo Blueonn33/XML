@@ -242,4 +242,121 @@ return $x
     <li>XQuery Kick Start</li>
 </ul>
 
+# Терминология на XQuery
+
+## Възли
+
+В XQuery има 7 вида възли:
+- елемент;
+- атрибут;
+- текст;
+- пространство от имена;
+- инструкция за обработка;
+- коментар;
+- документ (корен) възли;
+
+XML документите се третират като дървета от възли. Коренът на дървото се нарича възел на документа (или коренен възел)
+
+Имаме следния пример
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<bookstore>
+    <book>
+        <title lang="en">Harry Potter</title>
+        <author>J K. Rowling</author>
+        <year>2005</year>
+        <price>29.99</price>
+    </book>
+</bookstore>
+```
+
+Пример за възли в XML документа по-горе
+
+<bookstore>              коренен възел
+<author>                 елементен възел
+lang="en"                атрибутен възел
+
+## Атомни стойности
+
+Атомните стойности са възли без деца или родители. Пример за атомни стойности
+
+J K. Rowling
+"en"
+
+## Елементи
+
+Елементите са атомни стойности или възли
+
+## Връзка на възлите
+
+### Родител
+
+Всеки елемент и атрибут има 1 родител
+В следния пример: елементът book е родител на (title, author, year, price)
+
+<book>
+  <title>Harry Potter</title>
+  <author>J K. Rowling</author>
+  <year>2005</year>
+  <price>29.99</price>
+</book>
+
+### Деца
+
+Възлите на елементите могат да имат 0, 1 или повече деца
+В следния пример: елементите title, author, year и price са деца на book
+
+<book>
+  <title>Harry Potter</title>
+  <author>J K. Rowling</author>
+  <year>2005</year>
+  <price>29.99</price>
+</book>
+
+### Братя
+
+Възли, които имат един и същ родител
+В следния пример: елементите title, author, year, price са братя
+
+<book>
+  <title>Harry Potter</title>
+  <author>J K. Rowling</author>
+  <year>2005</year>
+  <price>29.99</price>
+</book>
+
+### Предци
+
+Родителят на възел, родителят на родителя, ..
+В примера предиците на елемента title са book и bookstore
+
+<bookstore>
+
+<book>
+  <title>Harry Potter</title>
+  <author>J K. Rowling</author>
+  <year>2005</year>
+  <price>29.99</price>
+</book>
+
+</bookstore>
+
+### Потомци
+
+Деца на възел, деца на деца, ..
+В следния пример, наследниците на елемента bookstore са елементите book, title, author, year и price
+
+<bookstore>
+
+<book>
+  <title>Harry Potter</title>
+  <author>J K. Rowling</author>
+  <year>2005</year>
+  <price>29.99</price>
+</book>
+
+</bookstore>
+
 # 
