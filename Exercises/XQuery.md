@@ -702,4 +702,3 @@ as xs:decimal?
 <minPrice>{local:minPrice($book/price, $book/discount)}</minPrice>
 ```
 
-# 
