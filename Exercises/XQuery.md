@@ -414,4 +414,217 @@ $bookstore//book/@q > 10
 
 $bookstore//book/@q gt 10
 
-# 
+# Добавяне на елементи и атрибути
+
+## Пример
+
+В примерите ще бъде използван books.xml
+
+## Добавяне на елементи и атрибути към резултата
+
+Можем да включим елементи и атрибути от входния документ (books.xml) в резултата:
+
+```js
+for $x in doc("books.xml")/bookstore/book/title
+order by $x
+return $x
+```
+
+Горният XQuery израз ще включва както елемента title, така и атрибута lang в резултата, ето така:
+
+<title lang="en">Everyday Italian</title>
+<title lang="en">Harry Potter</title>
+<title lang="en">Learning XML</title>
+<title lang="en">XQuery Kick Start</title>
+
+Горният XQuery израз връща елементите title по абсолютно същия начин, както са описани във входния документ
+
+Сега ще добавим собствени елементи и атрибути към резултата
+
+### Добавяне на HTML елементи и текст
+
+Ще поставим резултата в HTML списък - заедно с малко текст
+
+```html
+<html>
+    <body>
+        <h1>Bookstore</h1>
+        <ul>
+            {
+                for $x in doc("books.xml")/bookstore/book
+                order by $x/title
+                return <li>{data($x/title)}. Category: {data($x/@category)}</li>
+            }
+        </ul>
+    </body>
+</html>
+```
+
+Горният XQuery израз ще генерира следния резултат
+
+```html
+<html>
+    <body>
+    <h1>Bookstore</h1>
+    <ul>
+        <li>Everyday Italian. Category: COOKING</li>
+        <li>Harry Potter. Category: CHILDREN</li>
+        <li>Learning XML. Category: WEB</li>
+        <li>XQuery Kick Start. Category: WEB</li>
+    </ul>
+    </body>
+</html>
+```
+
+### Добавяне на атрибути към елементите
+
+След това искаме да използваме атрибута category като атрибут на class в HTML списъка
+
+```html
+<html>
+    <body>
+        <h1>Bookstore</h1>
+        <ul>
+            {
+                for $x in doc("books.xml")/bookstore/book
+                order by $x/title
+                return <li class="{data($x/@category)}">{data($x/title)}</li>
+            }
+        </ul>
+    </body>
+</html>
+```
+
+XQuery изразът генерира следния резултат
+
+```html
+<html>
+    <body>
+        <h1>Bookstore</h1>
+        <ul>
+            <li class="COOKING">Everyday Italian</li>
+            <li class="CHILDREN">Harry Potter</li>
+            <li class="WEB">Learning XML</li>
+            <li class="WEB">XQuery Kick Start</li>
+        </ul>
+    </body>
+</html>
+```
+
+# Избор и филтриране
+
+## Пример
+
+Ще използваме документа books.xml
+
+## Избор и филтриране на елементи
+
+В предишните глави за избор и филтриране на елементи беше използван XPath или израз с FLWOR
+
+Имаме следния пример
+
+```js
+for $x in doc("books.xml")/bookstore/book
+where $x/price > 30
+order by $x/title
+return $x/title
+```
+
+- for - свързва променлива с всеки елемент, върнат от израза *in*
+- where - определя критерий
+- order by - указва реда на сортиране на резултата
+- return - указва какво да се върне в резултата
+
+### Клаузата for
+
+Клаузата свързва променлива с всеки елемент, върнат от израза *in*. Клаузата води до итерация. В един и същ FLWOR израз може да има множество клаузи for.
+
+За да се изпълни цикъл за определен брой пъти в клауза for, може да се използва ключовата дума *to*
+
+```js
+for $x in (1 to 5)
+return <test>{$x}</test>
+```
+
+<test>1</test>
+<test>2</test>
+<test>3</test>
+<test>4</test>
+<test>5</test>
+
+Ключовата дума *at* може да се използва за преброяване на итерациите
+
+```js
+for $x at $i in doc("books.xml")/bookstore/book/title
+return <book>${i}. {data($x)}</book>
+```
+
+<book>1. Everyday Italian</book>
+<book>2. Harry Potter</book>
+<book>3. XQuery Kick Start</book>
+<book>4. Learning XML</book>
+
+Също така е позволено с повече от 1 елемент в израза в клаузата for. Използва се запетая за разделяне на всеки елемент в израза
+
+```js
+for $x in (10,20), $y in (100,200)
+return <test>x={$x} and y={$y}</test>
+```
+
+<test>x=10 and y=100</test>
+<test>x=10 and y=200</test>
+<test>x=20 and y=100</test>
+<test>x=20 and y=200</test>
+
+### Клаузата let
+
+Клаузата позволява присвояване на променливи и избягва многократното повтаряне на един и същ израз. Клаузата let не води до итерация
+
+```js
+let $x := (1 to 5)
+return <test>{$x}</test>
+```
+
+Резултат
+<test>1 2 3 4 5</test>
+
+### Клаузата where
+
+Клаузата се използва за задаване на 1 или повече критерии за резултата:
+
+```js
+where $x/price > 30 and $x/price < 100
+```
+
+### Клаузата order by
+
+Клаузата order by се използва за определяне на реда на сортиране на резултата. Искаме да подредим резултата по категория и заглавие
+
+```js
+for $x in doc("books.xml")/bookstore/book
+order by $x/@category, $x/title
+return $x/title
+```
+
+Резултат
+
+<title lang="en">Harry Potter</title>
+<title lang="en">Everyday Italian</title>
+<title lang="en">Learning XML</title>
+<title lang="en">XQuery Kick Start</title>
+
+### Клаузата return
+
+Клаузата уточнява какво трябва да се върне
+
+```js
+for $x in doc("books.xml")/bookstore/book
+return $x/title
+```
+
+Резултат
+
+<title lang="en">Everyday Italian</title>
+<title lang="en">Harry Potter</title>
+<title lang="en">XQuery Kick Start</title>
+<title lang="en">Learning XML</title>
