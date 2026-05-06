@@ -133,3 +133,147 @@ CDATA означава символни данни.
 CDATA е текст, който няма да бъде анализиран от парсер. Таговете в текста няма да бъдат третирани като маркиране и обектите няма да бъдат разгъвани.
 
 # DTD - Елементи
+
+В DTD елементите се декларират чрез ELEMENT
+
+## Деклариране
+
+В DTD, XML елементите се декларират със следния синтаксис
+
+```js
+<!ELEMENT element-name category>
+
+или
+
+<!ELEMENT element-name (element-content)>
+```
+
+### Празни елементи
+
+Празните елементи се декларират с ключовата дума за категория EMPTY
+
+```js
+<!ELEMENT element-name EMPTY>
+
+Example:
+
+<!ELEMENT br EMPTY>
+
+XML Example:
+
+<br />
+```
+
+### Елементи с анализирани символни данни
+
+Елементи, съдържащи само анализирани символни данни, се декларират с #PCDATA в скоби
+
+```js
+<!ELEMENT element-name (#PCDATA)>
+
+Example:
+
+<!ELEMENT from (#PCDATA)>
+```
+
+### Елементи с произволно съдържание
+
+Елементите, декларирани с ключовата дума category ANY, могат да съдържат произволна комбинация от данни, които могат да се анализират
+
+```js
+<!ELEMENT element-name ANY>
+
+Example
+
+<!ELEMENT note ANY>
+```
+
+### Елементи с деца (последователности)
+
+Елементите с едно или повече деца се декларират с името на децата в скоби
+
+```js
+<!ELEMENT element-name (child1)>
+
+или
+
+<!ELEMENT element-name (child1, child2, ...)>
+
+Example
+
+<!ELEMENT note (to, from, heading, body)>
+```
+
+Когато децата са декларирани в последователност, разделена със запетаи, те трябва да се появят в същата последователност в документа. При пълна декларация децата също трябва да бъдат декларирани и децата също могат да имат деца. Пълната декларация на елемента note е
+
+```js
+<!ELEMENT note (to, from, heading, body)>
+<!ELEMENT to (#PCDATA)>
+<!ELEMENT from (#PCDATA)>
+<!ELEMENT heading (#PCDATA)>
+<!ELEMENT body (#PCDATA)>
+```
+
+### Деклариране само на едно срещане на елемент
+
+```js
+<!ELEMENT element-name (child-name)>
+
+Example
+
+<!ELEMENT note (message)>
+```
+
+Горният пример декларира, че дъщерният елемент message трябва да се появи веднъж и само веднъж в елемента note
+
+### Деклариране на минимум едно срещане на елемент
+
+```js
+<!ELEMENT element-name (child-name+)>
+
+Example
+
+<!ELEMENT note (message)>
+```
+
+Знакът + декларира, че дъщерният елемент message трябва да се появи един или повече пъти в елемента note
+
+### Деклариране на 0 или повече срещания на даден елементю
+
+```js
+<!ELEMENT element-name (child-name*)>
+
+Example:
+
+<!ELEMENT note (message*)>
+```
+
+Знакът * декларира, че дъщерният елемент message може да се среща 0 или повече пъти в елемента note
+
+### Деклариране на 0 или 1 срещане на елемент
+
+```js
+<!ELEMENT element-name (child-name?)>
+
+Example:
+
+<!ELEMENT note (message?)>
+```
+
+### Деклариране на съдържание "или/или"
+
+```js
+<!ELEMENT note (to, from, header, (message | body))>
+```
+
+Елементът note трябва да съдържа елемент to, from, header и елемент message или body
+
+### Деклариране на смесено съдържание
+
+```js
+<!ELEMENT note (#PCDATA | to | from | header | message)*>
+```
+
+Елементът note може да съдържа 0 или повече съвпадения на анализирани символни данни, елементи to, from, header или message
+
+# 
