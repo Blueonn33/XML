@@ -276,4 +276,151 @@ Example:
 
 Елементът note може да съдържа 0 или повече съвпадения на анализирани символни данни, елементи to, from, header или message
 
+# DTD - Атрибути
+
+В DTD атрибутите се декларират с декларация ATTLIST
+
+## Декларация на атрибути
+
+Има следния синтаксис
+
+```js
+<!ATTLIST element-name attribute-name attribute-type attribute-value>
+
+DTD example
+
+<!ATTLIST payment type CDATA "check">
+
+XML example
+
+<payment type="check" />
+```
+
+**Типът на атрибута може да бъде един от следните**
+
+CDATA               символни данни
+(en1 | en2 | .. )   трябва да е 1 от изброен списък
+ID                  уникално ID
+IDREF               ID на друг елемент
+IDREFS              списък от ID-та
+NMTOKEN             валидно XML име
+NMTOKENS            списък от валидни XML имена
+ENTITY              обект
+ENTITIES            списък от обекти
+NOTATION            име на нотация
+xml:                предефинирана xml стойност
+
+**Стойността на атрибута може да бъде една от следните**
+
+value               стойност подразбиране на атрибута
+#REQUIRED           атрибутът е задължителен
+#IMPLIED            атрибутът не е задължителен
+#FIXED value        стойността на атрибута е константа
+
+### Стойност на атрибута по подразбиране
+
+```js
+DTD
+<!ELEMENT square EMPTY>
+<!ATTLIST square width CDATA "0">
+
+Valid XML
+<square width="100">
+```
+
+Елементът square е дефиниран като празен елемент с атрибут width от тип CDATA. Ако не е зададена ширина, стойността по подразбиране е 0
+
+### #REQUIRED
+
+Синтаксис
+
+```js
+<!ATTLIST element-name attribute-name attribute-type #REQUIRED>
+```
+
+Пример
+
+```js
+DTD
+<!ATTLIST person number CDATA #REQUIRED>
+
+Valid XML
+<person number="5677" />
+
+Invalid XML
+<person />
+```
+
+Ключовата дума #REQUIRED се използва, ако няма опция за стойност по подразбиране, но все пак се изисква атрибутът да бъде наличен
+
+### #IMPLIED
+
+Синтаксис
+
+```js
+<!ATTLIST element-name attribute-name attribute-type #IMPLIED>
+```
+
+Пример
+
+```js
+DTD
+<!ATTLIST contact fax CDATA #IMPLIED>
+
+Valid XML
+<contact fax="555-667788" />
+
+Valid XML
+<contact />
+```
+
+Ключовата дума не принуждава включване на атрибут и няма опция за стойност по подразбиране
+
+### #FIXED
+
+Синтаксис
+
+```js
+<!ATTLIST element-name attribute-name attribute-type #FIXED "value">
+```
+
+Пример
+
+```js
+DTD
+<!ATTLIST sender company CDATA #FIXED "Microsoft">
+
+Valid XML
+<sender company="Microsoft" />
+
+Invalid XML
+<sender company="W3Schools" />
+```
+
+Ключовата дума задава конкретна стойност на даден атрибут, без да позволява промяна. Ако бъде използвана друга стойност, XML анализаторът ще върне грешка
+
+### Изброени стойности на атрибути
+
+Синтаксис
+
+```js
+<!ATTLIST element-name attribute-name (en1 | en2 | ..) default-value>
+```
+
+Пример
+
+```js
+DTD
+<!ATTLIST payment type (check | cash) "cash">
+
+XML example
+<payment type="check" />
+
+или 
+
+<payment type="cash" />
+```
+
+Използваме изброени стойности, когато искаме стойността на атрибута да бъде една от фиксиран набор от допустими стойности
+
 # 
