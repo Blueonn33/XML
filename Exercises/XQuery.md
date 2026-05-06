@@ -628,3 +628,78 @@ return $x/title
 <title lang="en">Harry Potter</title>
 <title lang="en">XQuery Kick Start</title>
 <title lang="en">Learning XML</title>
+
+# Функции
+
+XQuery 1.0, XPath 2.0 и XSLT 2.0 споделят една и съща библиотека с функции
+
+## XQuery функции
+
+XQuery е изграден върху XPath изрази. XQuery 1.0, XPath 2.0 споделят един и същ модел на данни и поддържат едни и същи функции и оператори
+
+### Типове данни в XQuery
+
+XQuery споделя същите типове данни като XML Schema 1.0 (XSD)
+
+- XSD низ
+- XSD дата
+- XSD число
+- XSD други
+
+### Примери за извикване на функции
+
+Извикване на функция може да се появи там, където може да се появи израз.
+
+1. В елемент
+
+```js
+<name>{upper-case($booktitle)}</name>
+```
+
+2. В предиката на израз за път
+
+```js
+doc("books.xml")/bookstore/book[substring(title, 1, 5) = 'Harry']
+```
+
+3. В клаузата let
+
+```js
+let $name := (substring($booktitle, 1, 4))
+```
+
+### XQuery потребителски дефинирани функции
+
+Ако не можеш да намериш XQuery функция, можеш да напишеш своя собствена.
+Потребителски дефинираните функции могат да бъдат дефинирани в заявката или в отделна библиотека.
+
+```js
+declare function prefix:function_name ($parameter as datatype)
+as returnDatatype
+{
+    ... function code here ...
+};
+```
+
+Бележки относно потребителски дефинирани функции
+- използва се ключовата дума *declare function*;
+- името на функцията трябва да има префикс;
+- типът данни на параметрите е предимно същия като типовете данни, дефинирани в XML схемата;
+- тялото на функцията трябва да бъде оградено с фигурни скоби;
+
+#### Пример
+
+```js
+declare function local:minPrice ($p as xs:decimal?, $d as xs:decimal?)
+as xs:decimal?
+{
+    let $disc := ($p * $d) div 100
+    return ($p - $disc)
+};
+
+Извикване на функцията
+
+<minPrice>{local:minPrice($book/price, $book/discount)}</minPrice>
+```
+
+# 
