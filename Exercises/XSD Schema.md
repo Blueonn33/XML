@@ -566,4 +566,120 @@ XML елемент с атрибут
 `totalDigits`       определя точен набор от цифри, които са позволени
 `whiteSpace`        определя как празните пространства (табулация, интервал, нов ред) се обработват
 
+# Сложни елементи
+
+Сложният елемент е XML елемент, който съдържа други елементи и/или атрибути.
+Има четири вида сложни елементи:
+
+- празни елементи;
+- елементи, които съдържат само други елементи;
+- елементи, които съдържат само текст;
+- елементи, които съдържат както други елементи, така и текст
+
+:::note
+Всеки от тези елементи може да съдържа и атрибути
+:::
+
+## Примери
+
+Сложен XML елемент product, който е празен
+
+<product pid="13445" />
+
+Сложен елемент, който съдържа само други елементи
+
+<employee>
+    <firstname>Martin</firstname>
+    <lastname>Marinov</lastname>
+</employee>
+
+Сложен елемент, който съдържа само текст
+
+<food type="dessert">Ice cream</food>
+
+Сложен елемент, съдържащ както елементи, така и текст
+
+<description>
+It happened on <date lang="norwegian">03.03.99</date>...
+</description>
+
+### Как да дефинираме сложен елемент
+
+Имаме този пример
+
+<employee>
+  <firstname>John</firstname>
+  <lastname>Smith</lastname>
+</employee>
+
+Можем да дефинираме сложен елемент в XML Schema по 2 различни начина:
+
+1. Елементът employee може да бъде деклариран директно чрез именуване на елемента
+
+```xml
+<xs:element name="employee">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="firstname" type="xs:string" />
+            <xs:element name="lastname" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+```
+
+Чрез описания по-горе метод, само елементът `employee` може да използва посочения сложен тип. Дъщерните елементи `firstname` и `lastname` са заобиколени от индикатора `<sequence>`. Това означава, че дъщерните елементи трябва да се появяват в същия ред, в който са декларирани. 
+
+2. Елементът employee може да има атрибут type, който препраща към името на сложния тип, който да се използва
+
+```xml
+<xs:element name="employee" type="personinfo"/>
+
+<xs:complexType name="personinfo">
+    <xs:sequence>
+        <xs:element name="firstname" type="xs:string" />
+        <xs:element name="lastname" type="xs:string" />
+    </xs:sequence>
+</xs:complexType>
+```
+
+С описания по-горе метод, няколко елемента могат да се отнасят до един и същ сложен тип, ето така:
+
+```xml
+<xs:element name="employee" type="personinfo"/>
+<xs:element name="student" type="personinfo"/>
+<xs:element name="member" type="personinfo"/>
+
+<xs:complexType name="personinfo">
+    <xs:sequence>
+        <xs:element name="firstname" type="xs:string"/>
+        <xs:element name="lastname" type="xs:string"/>
+    </xs:sequence>
+</xs:complexType>
+```
+
+Може също така да се базира сложен тип на съществуващ сложен тип и да се добавят елементи. Използва се `extension` да вмъкване на сложен тип в друг.
+
+```xml
+<xs:element name="employee" type="fullpersoninfo"/>
+
+<xs:complexType name="personinfo">
+    <xs:sequence>
+        <xs:element name="firstname" type="xs:string"/>
+        <xs:element name="lastname" type="xs:string"/>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="fullpersoninfo">
+    <xs:complexContent>
+        <xs:extension base="personinfo">
+            <xs:sequence>
+                <xs:element name="address" type="xs:string"/>
+                <xs:element name="city" type="xs:string"/>
+                <xs:element name="country" type="xs:string"/>
+            </xs:sequence>
+        </xs:extension>
+    </xs:complexContent>
+</xs:complexType>
+```
+
 # 
