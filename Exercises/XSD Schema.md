@@ -86,4 +86,94 @@ XML Schema е разширяем, защото е написан на XML. С р
 
 Дори ако документите са добре оформени, те все пак могат да съдържат грешки и тези грешки могат да имат сериозни последици.
 
+# XSD - начин на използване
 
+XML документите могат да имат препратка към DTD или към XML Schema
+
+## Прост XML документ
+
+Имаме следния документ "note.xml"
+
+<?xml version="1.0"?>
+<note>
+  <to>Tove</to>
+  <from>Jani</from>
+  <heading>Reminder</heading>
+  <body>Don't forget me this weekend!</body>
+</note>
+
+## DTD файл
+
+Следният пример е DTD файл, наречен "note.dtd", който дефинира елементите на XML документа по-горе "note.xml"
+
+```js
+<!ELEMENT note (to, from, heading, body)>
+<!ELEMENT to (#PCDATA)>
+<!ELEMENT from (#PCDATA)>
+<!ELEMENT heading (#PCDATA)>
+<!ELEMENT body (#PCDATA)>
+```
+
+Първият ред определя елемента note да има 4 дъщерни елемента: 
+- to    from    heading     body
+
+Ред 2-5 определя елементите като тип #PCDATA
+
+## XML Schema
+
+Следният пример е XML Schema файл, наречен "note.xsd", който дефинира елементите на XML документа по-горе
+
+```xml
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="https://www.w3schools.com"
+xmlns="https://www.w3schools.com"
+elementFormDefault="qualified">
+
+<xs:element name="note">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="to" type="xs:string" />
+            <xs:element name="from" type="xs:string" />
+            <xs:element name="heading" type="xs:string" />
+            <xs:element name="body" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+```
+
+Елементът note e сложен тип, защото съдържа други елементи. Останалите елементи (to, from, heading, body) са прости типове, защото не съдържат други елементи. 
+
+### Препратка към DTD
+
+Този XML документ има препратка към DTD
+
+```xml
+<?xml version="1.0"?>
+
+<!DOCTYPE note SYSTEM "https://www.w3schools.com/xml/note.dtd">
+
+<note>
+  <to>Tove</to>
+  <from>Jani</from>
+  <heading>Reminder</heading>
+  <body>Don't forget me this weekend!</body>
+</note>
+```
+
+### Препратка към XML Schema
+
+Документът съдържа препратка към XML Schema
+
+```xml
+<?xml version="1.0"?>
+
+<note xmlns="https://www.w3schools.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://www.w3schools.com/xml note.xsd">
+  <to>Tove</to>
+  <from>Jani</from>
+  <heading>Reminder</heading>
+  <body>Don't forget me this weekend!</body>
+</note>
+```
+
+# 
