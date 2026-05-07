@@ -176,4 +176,69 @@ elementFormDefault="qualified">
 </note>
 ```
 
+# XSD <schema>
+
+Елементът <schema> е коренният елемент на всяка XML Schema
+
+<?xml version="1.0"?>
+
+<xs:schema>
+...
+</xs:schema>
+
+Елементът schema може да съдържа някои атрибути. Декларацията на схема често изглежда по следния начин
+
+<?xml version="1.0"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://www.w3schools.com" xmlns="https://www.w3schools.com" elementFormDefault="qualified">
+...
+</xs:schema>
+
+Следният фрагмент
+`xmlns:xs="http://www.w3.org/2001/XMLSchema"`
+
+Показва, че елементите и типовете данн, използвани в схемата, идват от пространството от имена http://www.. . Също така уточнява, че елементите и типовете данни, които идват от това пространство от имена, трябва да имат префикс `xs:`
+
+Този фрагмент
+`targetNamespace="https://www.w3schools.com"`
+
+Показва, че елементите, дефинирани от тази схема (note, to, from, title, body), идват от пространството от имена https://www ..
+
+Този фрагмент
+`xmlns="https://www.w3schools.com"`
+
+Показва, че пространството от имена по подразбиране е https://www.w3schools.com
+
+Последният фрагмент
+`elementFormDefault="qualified"`
+
+Показва, че всички елементи, използвани от XML екземпляра на документа, които са декларирани в тази схема, трябва да бъдат квалифицирани като пространство от имена
+
+## Препращане към схема в XML документ
+
+Този XML документ съдържа препратка към XML схема
+
+<?xml version="1.0"?>
+
+<note xmlns="https://www.w3schools.com"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="https://www.w3schools.com note.xsd">
+
+<to>Tove</to>
+<from>Jani</from>
+<heading>Reminder</heading>
+<body>Don't forget me this weekend!</body>
+</note>
+
+`xmlns="https://www.w3schools.com"`
+
+Указва декларацията на пространството от имена по подразбиране. Тази декларация указва на валидатора на схемата, че всички елементи, използвани в този XML документ, са декларирани в пространството от имена „https://www.w3schools.com“.
+
+След като имаме налично пространство от имена на XML схема : `xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"`
+
+Можем да използваме атрибута `schemaLocation`. Този атрибут има 2 стойности, разделени с интервал. Първата стойност е пространството от имена, което да се използва. Втората стойност е местоположението на XML схемата, която да се използва за това пространство от имена
+
+`xsi:schemaLocation="https://www.w3schools.com note.xsd"`
+
+
 # 
