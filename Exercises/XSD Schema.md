@@ -357,4 +357,162 @@ XML елемент с атрибут
 
 С XML Schema може да се добавят собствени ограничения към XML елементите и атрибутите им. Тези ограничения се наричат `фасети`. 
 
-# 
+# Ограничения / Facets
+
+Ограниченията се използват за дефиниране на приемливи стойности за XML елементи или атрибути. Ограниченията върху XML елементите се наричат facets
+
+## Ограничения върху стойностите
+
+Следният пример дефинира елемент `age` с ограничение. Стойността на age не може да бъде < 0 или > 120
+
+```xml
+<xs:element name="age">
+    <xs:simpleType>
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0" />
+            <xs:maxInclusive value="120" />
+        </xs:restriction>
+    </xs:simpleType>
+</xs:element>
+```
+
+### Ограничения върху набор от стойности
+
+За да ограничим съдържанието на XML елемент до набор от приемливи стойности, бихме използвали ограничението за изброяване.
+
+Примерът по-долу дефинира елемент `car`, с ограничение. Единствените приемливи стойности са: Suzuki, Hyundai, Toyota
+
+<xs:element name="car">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Audi"/>
+      <xs:enumeration value="Golf"/>
+      <xs:enumeration value="BMW"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+Горният пример би могъл да бъде написан и така
+
+<xs:element name="car" type="carType"/>
+
+<xs:simpleType name="carType">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="Audi"/>
+    <xs:enumeration value="Golf"/>
+    <xs:enumeration value="BMW"/>
+  </xs:restriction>
+</xs:simpleType>
+
+В този случай типът `carType` може да се използва от други елементи, защото не е част от елемента `car`
+
+### Ограничения върху поредица от стойности
+
+За да ограничим съдържанието на XML елемент, за да дефинираме поредица от числа или букви, които могат да се използват, бихме използвали ограничението на шаблона
+
+Примерът дефинира елемент `letter`, с ограничение. Единствената приемлива стойност е 1 от малките букви a-z
+
+<xs:element name="letter">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-z]"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+Следващият пример дефинира елемент, наречен `initials`. 
+
+<xs:element name="initials">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Z][A-Z][A-Z]"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+Също и този
+
+<xs:element name="initials">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-zA-Z][a-zA-Z][a-zA-Z]"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+Следващият пример е `choise`. Избира се 1 от 3-те букви
+
+<xs:element name="choice">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[xyz]"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+### Други ограничения
+
+Допустимата стойност е 0 или повече срещания на малки букви от a-z
+
+<xs:element name="letter">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([a-z])*"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+В следващия пример трябва да се използва поне 1 от тези двойки букви
+
+<xs:element name="letter">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([a-z][A-Z])+"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+В следващия пример се избира пол - една от двете стойности
+
+<xs:element name="gender">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="male|female"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+Следващият пример включва стойност, която трябва да съдържа точно 8 знака, като знаците са от тези: a-z A-Z 0-9
+
+<xs:element name="password">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-zA-Z0-9]{8}"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+### Ограничения за символи за интервали
+
+За да определим как трябва да се обработват символите за интервали, ще използваме ограничението `whiteSpace`
+
+Ограничението whiteSpace е зададено на `preserve`, което означава, че XML процесорът НЯМА да премахне никакви символи за интервал
+
+<xs:element name="address">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+В другия пример `replace` означава, че XML процесорът ЩЕ ЗАМЕНИ всички символи за интервали (нов ред, табулация, .. ) с интервали
+
+<xs:element name="address">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="replace"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
