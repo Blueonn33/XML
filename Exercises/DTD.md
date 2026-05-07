@@ -528,3 +528,50 @@ body="Don't forget me this weekend!">
 Метаданните (данни за данни) трябва да се съхраняват като атрибути, а самите данни трябва да се съхраняват като елементи.
 
 # DTD обекти
+
+Обектите се използват за дефиниране на стойности до специални символи. Обектите могат да бъдат декларирани като вътрешни или външни
+
+## Вътрешна декларация на обект
+
+Синтаксис
+
+```js
+<!ENTITY entity-name "entity-value">
+```
+
+Пример
+
+```js
+DTD Example
+
+<!ENTITY writer "Donald Duck."
+<!ENTITY copywright "Copyright W3Schools.">
+
+XML Example
+
+<author>&writer;&copywright;</author>
+```
+
+Обектът се състои от 3 части:
+&   име на обекта  ;
+
+## Декларация за външен обект
+
+Синтаксис
+
+```js
+<!ENTITY entity-name SYSTEM "URI/URL">
+```
+
+Пример
+
+```js
+DTD Example
+
+<!ENTITY writer SYSTEM "https://www.w3schools.com/entities.dtd">
+<!ENTITY copywright SYSTEM "https://www.w3schools.com/entities.dtd">\
+
+XML Example
+
+<author>&writer;&copyright;</author>
+```
