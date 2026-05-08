@@ -875,4 +875,237 @@ XML елемент `letter`, който съдържа както текст, т
 
 # XSD индикатори
 
-це
+Можем да контролираме КАК елементите да се използват в документи с индикатори
+
+## Индикатори
+
+Има 7 индикатора
+
+`Индикатори за подредба`
+
+- All - всички
+- Choice - избор
+- Sequence - последователност
+
+`Индикатори за поява`
+
+- maxOccurs - макс брой срещания
+- minOccurs - мин брой срещания
+
+`Групови показатели`
+
+- Group name
+- attributeGroup name
+
+### Индикатори за подредба (Order Indicators)
+
+Използват се за определяне на реда на елементите
+
+#### All
+
+Указва, че дъщерните елементи могат да се появяват в произволен ред и че всеки дъщерен елемент трябва да се появява само веднъж. 
+
+<xs:element name="person">
+  <xs:complexType>
+    <xs:all>
+      <xs:element name="firstname" type="xs:string"/>
+      <xs:element name="lastname" type="xs:string"/>
+    </xs:all>
+  </xs:complexType>
+</xs:element>
+
+**Забележка** - при използване на индикатора `<all>` може да се зададе индикатор `<minOccurs>` на 0 или 1, `<maxOccurs>` може да бъде зададен само на 1
+
+#### Choice
+
+Указва, че може да се появи или един дъщерен елемент, или друг
+
+<xs:element name="person">
+  <xs:complexType>
+    <xs:choice>
+      <xs:element name="employee" type="employee"/>
+      <xs:element name="member" type="member"/>
+    </xs:choice>
+  </xs:complexType>
+</xs:element>
+
+#### Sequence
+
+Указва, че дъщерните елементи трябва да се появяват в определен ред
+
+<xs:element name="person">
+   <xs:complexType>
+    <xs:sequence>
+      <xs:element name="firstname" type="xs:string"/>
+      <xs:element name="lastname" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+### Индикатори за поява (Occurrence Indicators)
+
+Определят колко често може да се появи даден елемент
+
+**Забележка** - за всички индикатори "Подредба" и "Група" ( any, all, choice, sequence, group name, and group reference ) стойността по подразбиране за maxOccurs и minOccurs e 1
+
+#### maxOccurs
+
+Указва максималния брой пъти, в които може да се появи даден елемент
+
+<xs:element name="person">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="full_name" type="xs:string"/>
+      <xs:element name="child_name" type="xs:string" maxOccurs="10"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+Елементът `child_name` може да се появи минимум веднъж (стойността по подразбиране за minOccurs е 1) и максимум 10 пъти в елемента person
+
+#### minOccurs
+
+Указва минималния брой пъти, в които може да се появи даден елемент
+
+<xs:element name="person">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="full_name" type="xs:string"/>
+      <xs:element name="child_name" type="xs:string"
+      maxOccurs="10" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+Елементът `child_name` може да се появи минимум 0 пъти и максимум 10 пъти в елемента person
+
+:::note
+За да може даден елемент да се появява неограничен брой пъти, се използва оператора `maxOccurs="unbounded"`
+:::
+
+#### Пример
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persons xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="family.xsd">
+
+<person>
+  <full_name>Hege Refsnes</full_name>
+  <child_name>Cecilie</child_name>
+</person>
+
+<person>
+  <full_name>Tove Refsnes</full_name>
+  <child_name>Hege</child_name>
+  <child_name>Stale</child_name>
+  <child_name>Jim</child_name>
+  <child_name>Borge</child_name>
+</person>
+
+<person>
+  <full_name>Stale Refsnes</full_name>
+</person>
+
+</persons>
+```
+
+XML файлът съдържа коренен елемент с име persons. Вътре в този коренен елемент сме дефинирали 3 елемента person. Всеки елемент person съдържа елемент full_name и може да съдържа до 5 елемента child_name
+
+```xsd
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+elementFormDefault="qualified">
+
+<xs:element name="persons">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="person" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="full_name" type="xs:string"/>
+            <xs:element name="child_name" type="xs:string"
+            minOccurs="0" maxOccurs="5"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+</xs:schema>
+```
+
+### Групови индикатори (Group Indicators)
+
+Използват се за дефиниране на свързани набори от елементи
+
+#### Element Groups
+
+Дефинират се с декларацията на групата
+
+<xs:group name="groupname">
+...
+</xs:group>
+
+Трябва да дефинираме елемент `all, choice или sequence` в декларацията на групата. Следващият пример дефинира група с име persongroup, която определя група от елементи, които трябва да се появят в точна последователност
+
+<xs:group name="persongroup">
+  <xs:sequence>
+    <xs:element name="firstname" type="xs:string"/>
+    <xs:element name="lastname" type="xs:string"/>
+    <xs:element name="birthday" type="xs:date"/>
+  </xs:sequence>
+</xs:group>
+
+След като сме дефинирали група, можем да я препратим в друга дефиниция 
+
+<xs:group name="persongroup">
+  <xs:sequence>
+    <xs:element name="firstname" type="xs:string"/>
+    <xs:element name="lastname" type="xs:string"/>
+    <xs:element name="birthday" type="xs:date"/>
+  </xs:sequence>
+</xs:group>
+
+<xs:element name="person" type="personinfo"/>
+
+<xs:complexType name="personinfo">
+  <xs:sequence>
+    <xs:group ref="persongroup"/>
+    <xs:element name="country" type="xs:string"/>
+  </xs:sequence>
+</xs:complexType>
+
+#### Attribute Groups
+
+Дефинират се с декларацията на attributeGroup
+
+<xs:attributeGroup name="groupname">
+...
+</xs:attributeGroup>
+
+Примерът дефинира група атрибути с име personattrgroup
+
+<xs:attributeGroup name="personattrgroup">
+  <xs:attribute name="firstname" type="xs:string"/>
+  <xs:attribute name="lastname" type="xs:string"/>
+  <xs:attribute name="birthday" type="xs:date"/>
+</xs:attributeGroup>
+
+След като сме дефинирали група атрибути, можем да я препратим в друга дефиниция
+
+<xs:attributeGroup name="personattrgroup">
+  <xs:attribute name="firstname" type="xs:string"/>
+  <xs:attribute name="lastname" type="xs:string"/>
+  <xs:attribute name="birthday" type="xs:date"/>
+</xs:attributeGroup>
+
+<xs:element name="person">
+  <xs:complexType>
+    <xs:attributeGroup ref="personattrgroup"/>
+  </xs:complexType>
+</xs:element>
+
+# 
