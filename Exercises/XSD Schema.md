@@ -1233,4 +1233,93 @@ XML файлът по-горе е валиден, защото схемата fa
 
 Елементите <any> и <anyAttribute> се използват за създаване на РАЗШИРЯЕМИ документи. Те позволяват документите да съдържат допълнителни елементи, които не са декларирани в основната XML Schema
 
+# Заместване
+
+При XML Schema един елемент може да замести друг елемент
+
+Да кажем, че имаме потребители от 2 различни държави: България, Япония. Бихме искали да имаме възможността да позволим на потребителя да избере дали иска да използва българските или японските имена на елементи в XML документа.
+
+За да решим този проблем, бихме могли да дефинираме `substitutionGroup` в XML Schema. Първо, декларираме `head` елемент, а след това останалите елементи, които заявяват, че са заместими с `head` елемента
+
+```xml
+<xs:element name="name" type="xs:string" />
+<xs:element name="име" substitutionGroup="name" />
+```
+
+В горния пример елементът `name` e `head` елементът, а елементът `име` е заместител на `name`
+
+Имаме този фрагмент от XML Schema
+
+```xml
+<xs:element name="name" type="xs:string"/>
+<xs:element name="име" substitutionGroup="name"/>
+
+<xs:complexType name="custinfo">
+  <xs:sequence>
+    <xs:element ref="name"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:element name="customer" type="custinfo"/>
+<xs:element name="клиент" substitutionGroup="customer"/>
+```
+
+Валиден XML документ (според схемата по-горе) може да изглежда така
+
+```xml
+<customer>
+  <name>Martin</name>
+</customer>
+
+или
+
+<клиент>
+  <име>Martin</име>
+</клиент>
+```
+
+### Блокиране на заместването
+
+За да се предотврати заместването на определен елемент от други елементи, се използва атрибута `block`
+
+<xs:element name="name" type="xs:string" block="substitution" />
+
+Имаме фрагмент от XML Schema
+
+<xs:element name="name" type="xs:string" block="substitution"/>
+<xs:element name="име" substitutionGroup="name"/>
+
+<xs:complexType name="custinfo">
+  <xs:sequence>
+    <xs:element ref="name"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:element name="customer" type="custinfo" block="substitution"/>
+<xs:element name="клиент" substitutionGroup="customer"/>
+
+Валиден XML документ (според схемата по-горе) може да изглежда така
+
+```xml
+<customer>
+  <name>Martin</name>
+</customer>
+
+Това вече е невалидно!
+
+<клиент>
+  <име>Martin</име>
+</клиент>
+```
+
+## Използване на substitutionGroup
+
+Типът на заместващите елементи трябва да е същия като или производен от типа на началния елемент. Ако типът на заместващия елемент е същия като типа на началния елемент, няма да е необходимо да се посочва типа на заместващия елемент.
+
+Всички елементи в `substitutionGroup` (елементът head и заместващите елементи) трябва да бъдат декларирани като глобални елементи, в противен случай няма да работи
+
+### Глобални елементи
+
+Това са елементи, които са непосредствени деца на елемента Schema. Локалните елементи са елементи, вложени в други елементи
+
 # 
