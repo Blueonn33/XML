@@ -724,4 +724,39 @@ It happened on <date lang="norwegian">03.03.99</date>...
   <xs:attribute name="prodid" type="xs:positiveInteger"/>
 </xs:complexType>
 
+# XSD Elements-only
+
+Сложният тип elements-only съдържа елемент, който съдържа само други елементи
+
+XML елемент person, който съдържа само други елементи
+
+<person>
+  <firstname>John</firstname>
+  <lastname>Smith</lastname>
+</person>
+
+Можем да дефинираме елемента person в XML Schema
+
+<xs:element name="person">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="firstname" type="xs:string"/>
+      <xs:element name="lastname" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+Тагът `<xs:sequence>` указва, че дефинираните елементи (firstname, lastname) трябва да се появят в този ред вътре в елемента person
+
+Или може да се даде име на елемента `complexType` и да бъде позволено на елемента person да има атрибут type, който препраща към името на complexType (чрез този метод, няколко елемента могат да препращат към един и същ сложен тип)
+
+<xs:element name="person" type="persontype"/>
+
+<xs:complexType name="persontype">
+  <xs:sequence>
+    <xs:element name="firstname" type="xs:string"/>
+    <xs:element name="lastname" type="xs:string"/>
+  </xs:sequence>
+</xs:complexType>
+
 # 
