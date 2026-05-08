@@ -1172,3 +1172,65 @@ XML файлът по-горе е валиден, защото схемата fa
 Елементите <any> и <anyAttribute> се използват за създаване на РАЗШИРЯЕМИ документи. Те позволяват на документите да съдържат допълнителни елементи, които не са декларирани в основната схема
 
 # anyAttribute 
+
+Елементът ни позволява да разширим XML документа с атрибути, които не са посочени от схемата
+
+Следният пример е парче от XML Schema (family.xsd). Той показва декларация за елемента person. Чрез използване на елемента anyAttribute можем да добавим произволен брой атрибути към елемента person
+
+<xs:element name="person">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="firstname" type="xs:string"/>
+      <xs:element name="lastname" type="xs:string"/>
+    </xs:sequence>
+    <xs:anyAttribute/>
+  </xs:complexType>
+</xs:element>
+
+Сега искаме да разширим елемента person с атрибут eyecolor. В този случай можем да го направим, дори ако авторът на XML Schema никога не е декларирал атрибут `eyecolor`
+
+attribute.xsd
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="https://www.w3schools.com"
+xmlns="https://www.w3schools.com"
+elementFormDefault="qualified">
+
+<xs:attribute name="eyecolor">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="blue|brown|green|grey"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:attribute>
+
+</xs:schema>
+
+XML файлът по-долу (Myfamily.xml) използва компоненти от 2 различни схеми: 
+family.xsd , attribute.xsd
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persons xmlns="http://www.microsoft.com"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:SchemaLocation="http://www.microsoft.com family.xsd
+https://www.w3schools.com attribute.xsd">
+
+<person eyecolor="green">
+  <firstname>Hege</firstname>
+  <lastname>Refsnes</lastname>
+</person>
+
+<person eyecolor="blue">
+  <firstname>Stale</firstname>
+  <lastname>Refsnes</lastname>
+</person>
+
+</persons>
+
+XML файлът по-горе е валиден, защото схемата family.xsd ни позволява да добавим атрибут към елемента person
+
+Елементите <any> и <anyAttribute> се използват за създаване на РАЗШИРЯЕМИ документи. Те позволяват документите да съдържат допълнителни елементи, които не са декларирани в основната XML Schema
+
+# 
