@@ -1322,4 +1322,288 @@ XML файлът по-горе е валиден, защото схемата fa
 
 Това са елементи, които са непосредствени деца на елемента Schema. Локалните елементи са елементи, вложени в други елементи
 
-# 
+# Пример за XSD
+
+Тази глава ще демонстрира как да се напише XML Schema. 
+
+## XML документ
+
+Имаме XML документ (shiporder.xml)
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<shiporder orderid="889923"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="shiporder.xsd">
+  <orderperson>John Smith</orderperson>
+  <shipto>
+    <name>Ola Nordmann</name>
+    <address>Langgt 23</address>
+    <city>4000 Stavanger</city>
+    <country>Norway</country>
+  </shipto>
+  <item>
+    <title>Empire Burlesque</title>
+    <note>Special Edition</note>
+    <quantity>1</quantity>
+    <price>10.90</price>
+  </item>
+  <item>
+    <title>Hide your heart</title>
+    <quantity>1</quantity>
+    <price>9.90</price>
+  </item>
+</shiporder>
+
+XML документът се състои от коренен елемент `shiporder`, който съдържа задължителен атрибут, наречен `orderid`
+
+Елементът `shiporder` съдържа 3 различни дъщерни елемента:
+- orderperson;
+- shipto;
+- item;
+
+Елементът item се появява 2 пъти и съдържа:
+- title;
+- note (незадължителен);
+- quantity;
+- price;
+
+Горният ред `xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"` указва на XML парсера, че този документ трябва да бъде валидиран спрямо схемата.
+
+Редът
+
+`xsi:noNamespaceSchemaLocation="shiporder.xsd"` указва къде се намира схемата (в същата папка като shiporder.xml)
+
+### Създаване на XML Schema
+
+Сега искаме да създадем схема за XML документа по-горе.
+
+Започваме с отваряне на нов файл (shiporder.xsd). За да създадем схемата, можем да следваме структурата в XML документа и да дефинираме всеки елемент, както го намерим. Започваме със стандартна XML декларация, последвана от елемента `xs:schema`, който дефинира схема
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+...
+</xs:schema>
+```
+
+В схемата използваме стандартното пространство от имена (xs), a URI, свързан с това пространство от имена, е дефиницията на езика Schema, която има стандартната стойност `http://www.w3.org/2001/XMLSchema`.
+
+След това дефинираме елемента `shiporder`. Този елемент има атрибут и съдържа други елементи, следователно го разглеждаме като сложен тип. Дъщерните елементи на елемента `shiporder` са заобиколени от елемент `xs:sequence`, който дефинира подредена последователност от елементи
+
+<xs:element name="shiporder">
+  <xs:complexType>
+    <xs:sequence>
+      ...
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+След това дефинираме елемента `orderperson` като прост тип (защото не съдържа никакви атрибути или други елементи). Типът `xs:string` е с префикс на пространството от имена, свързан с XML Schema, който показва предварително дефиниран тип данни на схемата
+
+<xs:element name="orderperson" type="xs:string" />
+
+След това трябва да дефинираме 2 елемента от сложен тип: `shipto` и `item`. Започваме с дефинирането на елемента `shipto`
+
+<xs:element name="shipto">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="address" type="xs:string"/>
+      <xs:element name="city" type="xs:string"/>
+      <xs:element name="country" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+Със схемите можем да дефинираме броя на възможните появи на даден елемент с атрибутите `maxOccurs` и `minOccurs`. maxOccurs указва максималния брой появи на даден елемент, а minOccurs указва минималния брой. Стойността по подразбиране както за maxOccurs, така и за minOccurs e 1
+
+Сега дефинираме елемента `item`. Елементът може да се появява многократно в елемент `shiporder`. Това се определя чрез задаване на атрибута maxOccurs на елементa `item` на `unbounded`, което означава, че може да има толкова срещания на елемента `item`, колкото авторът желае. Елементът note не е задължителен. Затова minOccurs е зададен на 0
+
+<xs:element name="item" maxOccurs="unbounded">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="note" type="xs:string" minOccurs="0"/>
+      <xs:element name="quantity" type="xs:positiveInteger"/>
+      <xs:element name="price" type="xs:decimal"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+Следва декларация на атрибута на елемента `shiporder`. Тъй като е задължителен атрибут, задаваме `use="required"`
+
+:::note
+Декларациите на атрибутите винаги трябва да са последни
+:::
+
+<xs:attribute name="orderid" type="xs:string" use="required"/>
+
+#### Пълен код на схемата
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:element name="shiporder">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="orderperson" type="xs:string"/>
+      <xs:element name="shipto">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="address" type="xs:string"/>
+            <xs:element name="city" type="xs:string"/>
+            <xs:element name="country" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="item" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="note" type="xs:string" minOccurs="0"/>
+            <xs:element name="quantity" type="xs:positiveInteger"/>
+            <xs:element name="price" type="xs:decimal"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="orderid" type="xs:string" use="required"/>
+  </xs:complexType>
+</xs:element>
+
+</xs:schema>
+
+### Разделяне на схемата
+
+Предишният метод на проектиране е много прост, но може да бъде труден за четене и поддръжка, когато документите са сложни
+
+Следващият метод на проектиране се основава на дефиниране първо на всички елементи и атрибути, а след това на препращане към тях с помощта на атрибута `ref`
+
+Нов дизайн на файла със схемата `shiporder.xsd`
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<!-- definition of simple elements -->
+<xs:element name="orderperson" type="xs:string"/>
+<xs:element name="name" type="xs:string"/>
+<xs:element name="address" type="xs:string"/>
+<xs:element name="city" type="xs:string"/>
+<xs:element name="country" type="xs:string"/>
+<xs:element name="title" type="xs:string"/>
+<xs:element name="note" type="xs:string"/>
+<xs:element name="quantity" type="xs:positiveInteger"/>
+<xs:element name="price" type="xs:decimal"/>
+
+<!-- definition of attributes -->
+<xs:attribute name="orderid" type="xs:string"/>
+
+<!-- definition of complex elements -->
+<xs:element name="shipto">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="name"/>
+      <xs:element ref="address"/>
+      <xs:element ref="city"/>
+      <xs:element ref="country"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="item">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="title"/>
+      <xs:element ref="note" minOccurs="0"/>
+      <xs:element ref="quantity"/>
+      <xs:element ref="price"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="shiporder">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="orderperson"/>
+      <xs:element ref="shipto"/>
+      <xs:element ref="item" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute ref="orderid" use="required"/>
+  </xs:complexType>
+</xs:element>
+
+</xs:schema>
+
+### Използване на именувани типове
+
+Третият метод на проектиране дефинира класове или типове, което ни позволява да използваме повторно дефинициите на елементи. Това се прави чрез именуване на елементите `simpleTypes` и `complexTypes` и след това чрез посочване на тях чрез атрибута `type` на елемента
+
+Ето третия дизайн на файла със схемата (shiporder.xsd)
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:simpleType name="stringtype">
+  <xs:restriction base="xs:string"/>
+</xs:simpleType>
+
+<xs:simpleType name="inttype">
+  <xs:restriction base="xs:positiveInteger"/>
+</xs:simpleType>
+
+<xs:simpleType name="dectype">
+  <xs:restriction base="xs:decimal"/>
+</xs:simpleType>
+
+<xs:simpleType name="orderidtype">
+  <xs:restriction base="xs:string">
+    <xs:pattern value="[0-9]{6}"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:complexType name="shiptotype">
+  <xs:sequence>
+    <xs:element name="name" type="stringtype"/>
+    <xs:element name="address" type="stringtype"/>
+    <xs:element name="city" type="stringtype"/>
+    <xs:element name="country" type="stringtype"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="itemtype">
+  <xs:sequence>
+    <xs:element name="title" type="stringtype"/>
+    <xs:element name="note" type="stringtype" minOccurs="0"/>
+    <xs:element name="quantity" type="inttype"/>
+    <xs:element name="price" type="dectype"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="shipordertype">
+  <xs:sequence>
+    <xs:element name="orderperson" type="stringtype"/>
+    <xs:element name="shipto" type="shiptotype"/>
+    <xs:element name="item" maxOccurs="unbounded" type="itemtype"/>
+  </xs:sequence>
+  <xs:attribute name="orderid" type="orderidtype" use="required"/>
+</xs:complexType>
+
+<xs:element name="shiporder" type="shipordertype"/>
+
+</xs:schema>
+
+Елементът `restriction` показва, че типът данни е извлечен от тип данни на пространство от имена на W3C XML Schema. Следователно, следният фрагмент означава, че стойността на елемента или атрибута трябва да бъде низова стойност.
+
+<xs:restriction base="xs:string">
+
+Елементът за ограничение се използва по-често за прилагане на ограничения към елементи. Виж следните редове от схемата по-горе
+
+<xs:simpleType name="orderidtype">
+  <xs:restriction base="xs:string">
+    <xs:pattern value="[0-9]{6}"/>
+  </xs:restriction>
+</xs:simpleType>
+
+Това показва, че стойността на елемента или атрибута трябва да е низ, трябва да е точно 6 знака подред и тези знаци да са числа 0-9.
