@@ -1108,4 +1108,67 @@ elementFormDefault="qualified">
   </xs:complexType>
 </xs:element>
 
-# 
+# Any
+
+Елементът <any> позволява разширяване на XML документа с елементи, които не са посочени от схемата
+
+Следният пример е фрагмент от XML Schema, наречена `family.xsd`. Той показва декларация за елемента person. Чрез използване на елемента any можем да разширим (след <lastname>) съдържанието на person с произволен елемент
+
+<xs:element name="person">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="firstname" type="xs:string"/>
+      <xs:element name="lastname" type="xs:string"/>
+      <xs:any minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+Сега искаме да разширим елемента person с елемент children. В този случай можем да го направим, дори ако авторът на схемата по-горе никога не е декларирал никакъв елемент children
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="https://www.w3schools.com"
+xmlns="https://www.w3schools.com"
+elementFormDefault="qualified">
+
+<xs:element name="children">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="childname" type="xs:string"
+      maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+</xs:schema>
+
+XML файлът по-долу използва компоненти от 2 различни схеми „family.xsd“ и „children.xsd“
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persons xmlns="http://www.microsoft.com"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.microsoft.com family.xsd
+https://www.w3schools.com children.xsd">
+
+<person>
+  <firstname>Hege</firstname>
+  <lastname>Refsnes</lastname>
+  <children>
+    <childname>Cecilie</childname>
+  </children>
+</person>
+
+<person>
+  <firstname>Stale</firstname>
+  <lastname>Refsnes</lastname>
+</person>
+
+</persons>
+
+XML файлът по-горе е валиден, защото схемата family.xsd ни позволява да разширим елемента person с незадължителен елемент след елемента lastname
+
+Елементите <any> и <anyAttribute> се използват за създаване на РАЗШИРЯЕМИ документи. Те позволяват на документите да съдържат допълнителни елементи, които не са декларирани в основната схема
+
+# anyAttribute 
