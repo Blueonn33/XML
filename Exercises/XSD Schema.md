@@ -682,4 +682,46 @@ It happened on <date lang="norwegian">03.03.99</date>...
 </xs:complexType>
 ```
 
+# Празни елементи
+
+Празният сложен елемент не може да има съдържание, само атрибути
+
+## Сложни празни елементи
+
+Празен елемент
+
+<product prodid="1345" />
+
+Елементът product няма съдържание. Да се определи тип без съдържание трябва да определим тип, който позволява елементи в съдържанието си, но всъщност не декларираме никакви елементи като този
+
+```xml
+<xs:element name="product">
+  <xs:complexType>
+    <xs:complexContent>
+      <xs:restriction base="xs:integer">
+        <xs:attribute name="prodid" type="xs:positiveInteger"/>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:element>
+```
+
+В горния пример е дефиниран сложен тип със сложно съдържание. Елементът complexContent сигнализира, че възнамеряваме да ограничим или разширим модела на съдържание на сложен тип, а ограничението integer декларира един атрибут, но не въвежда никакво съдържание на елемента.
+
+Можем да декларираме product и така
+
+<xs:element name="product">
+  <xs:complexType>
+    <xs:attribute name="prodid" type="xs:positiveInteger"/>
+  </xs:complexType>
+</xs:element>
+
+Или можем да дадем име на елемента complexType и да позволим на елемента product да има атрибут type, който препраща към името на complextType (по този начин няколко елемента могат да препращат към един и същ сложен тип)
+
+<xs:element name="product" type="prodtype"/>
+
+<xs:complexType name="prodtype">
+  <xs:attribute name="prodid" type="xs:positiveInteger"/>
+</xs:complexType>
+
 # 
