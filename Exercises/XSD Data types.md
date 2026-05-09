@@ -255,3 +255,66 @@ time                времева стойност
 
 ## Decimal
 
+Използва се за задаване на числова стойност. Следва пример за декларация в схема:
+
+<xs:element name="price" type="xs:decimal" />
+
+Елемент в документа изглежда така
+
+<price>999.50</price>
+
+или така
+
+<price>+999.5450</price>
+<price>-999.5230</price>
+<price>0</price>
+<price>14</price>
+
+## Integer
+
+Задава числова стойност без дробна част
+Пример за декларация на цяло число в схема
+
+<xs:element name="price" type="xs:integer"/>
+
+Елемент в документа може да изглежда така:
+
+<price>999</price>
+<price>+999</price>
+<price>-999</price>
+<price>0</price>
+
+## Числови типове данни 
+
+Всички типове данни по-долу произлизат от типа данни Decimal
+
+byte                        8-битово цяло число със знак
+decimal                     десетична стойност
+int                         32-битово цяло число със знак
+integer                     целочислена стойност
+long                        64-битово цяло число със знак
+negativeInteger             отрицателно цяло число
+nonNegativeInteger          позитивно цяло число и 0
+nonPositiveInteger          отрицателно цяло число и 0
+positiveInteger             цяло число без 0
+short                       16-битово цяло число със знак
+unsignedLong                64-битово цяло число без знак
+unsignedInt                 32-битово цяло число без знак
+unsignedShort               16-битово цяло число без знак
+unsignedByte                8-битово цяло число без знак
+
+## Ограничения върху числовите типове данни
+
+Ограничения, които могат да се използват с числови типове данни:
+
+- enumeration;
+- fractionDigits;
+- maxExclusive;
+- maxInclusive;
+- minExclusive;
+- minInclusive;
+- pattern;
+- totalDigits;
+- whiteSpace;
+
+# 
