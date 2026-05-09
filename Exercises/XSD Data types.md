@@ -317,4 +317,68 @@ unsignedByte                8-битово цяло число без знак
 - totalDigits;
 - whiteSpace;
 
+# XSD Разни типове данни
+
+Други типове данни са boolean, base64Binary, hexBinary, float, double, anyURI, QName и NOTATION
+
+## Boolean
+
+Булев тип данни се използва за задаване на стойност true или false
+Пример за булева декларация в схема
+
+<xs:attribute name="disabled" type="xs:boolean"/>
+
+Елемент в документа
+
+<price disabled="true">17</price>
+
+Допустимите стойности за булева функция са true (1) или false (0)
+
+## Binary
+
+Двоичните типове данни се използват за изразяване на двоично форматирани данни
+Имаме 2 двоични типа данни
+
+- base64Binary (двоични данни, кодирани с Base64);
+- hexBinary (шестнадесетично кодирани двоични данни);
+
+Следва пример за декларация на hexBinary в схема
+
+<xs:element name="blobsrc" type="xs:hexBinary"/>
+
+## AnyURI
+
+Типът данни anyURI се използва за задаване на URI
+Декларация на anyURI в схема
+
+<xs:attribute name="src" type="xs:anyURI"/>
+
+Елемент в документа
+
+<pic src="https://www.w3schools.com/images/smiley.gif" />
+
+Ако URI адресът съдържа интервали, те се заменят с %20
+
+## Разни типове данни
+
+anyURI
+base64Binary
+boolean
+double
+float
+hexBinary
+NOTATION
+QName
+
+## Ограничения за типовете данни
+
+Ограничения, които могат да се използват за типовете данни са:
+
+- enumeration (boolean не може да го използва)
+- length (boolean не може да го използва)
+- maxLength (boolean не може да го използва)
+- minLength (boolean не може да го използва)
+- pattern
+- whiteSpace
+
 # 
