@@ -1,0 +1,30 @@
+contacts > email,
+annotation-dealer,
+annotation,
+car-id > *,
+truck-id > *,
+moto-id > * {
+  display: none;
+}
+
+name, manager, address, website {
+    font-size: 30px;
+    display: block;
+    padding: 20px;
+}
+
+name {
+    background-color: aquamarine;
+}
+
+manager {
+    background-color: aliceblue;
+}
+
+address {
+    background-color:beige;
+}
+
+website {
+    background-color: blanchedalmond;
+}
