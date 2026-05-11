@@ -1,0 +1,50 @@
+<!ELEMENT carstore (dealership)>
+<!ELEMENT dealership (name, manager, contacts, website, annotation-dealer, category)>
+<!ATTLIST dealership location CDATA #FIXED "Veliko Tarnovo">
+<!ELEMENT name (#PCDATA)>
+<!ENTITY name "Индиго">
+<!ELEMENT manager (#PCDATA)>
+<!ENTITY manager "Мартин">
+<!ELEMENT contacts (email, address)>
+<!ATTLIST contacts phone CDATA #REQUIRED>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT address (#PCDATA)>
+<!ENTITY address "ул. Улична 17">
+<!ELEMENT website (html:a)>
+<!ENTITY website "Indigo.com">
+<!ATTLIST website xmlns:html CDATA "http://www.w3.org/1999/xhtml">
+<!ELEMENT html:a (#PCDATA)>
+<!ATTLIST html:a href CDATA "https://blueonn33.github.io/martinmarinov/">
+<!ELEMENT annotation-dealer (#PCDATA)>
+<!ELEMENT category (car, truck, moto)>
+<!ELEMENT car (car-id+)>
+<!ELEMENT car-id (brand, model, year, price, color, km, power, fuel-type, transmission, condition, annotation, image, link)>
+<!ELEMENT brand (#PCDATA)>
+<!ELEMENT model (#PCDATA)>
+<!ELEMENT year (#PCDATA)>
+<!ELEMENT price (#PCDATA)>
+<!ELEMENT color (#PCDATA)>
+<!ELEMENT km (#PCDATA)>
+<!ELEMENT power (#PCDATA)>
+<!ATTLIST power unit CDATA #REQUIRED>
+<!ATTLIST price currency CDATA #REQUIRED>
+<!ELEMENT fuel-type (#PCDATA)>
+<!ELEMENT transmission (#PCDATA)>
+<!ELEMENT condition (#PCDATA)>
+<!ELEMENT annotation (#PCDATA)>
+<!ATTLIST annotation lang CDATA "BG">
+<!ELEMENT image (html:img+)>
+<!ATTLIST image xmlns:html CDATA "http://www.w3.org/1999/xhtml">
+<!ELEMENT html:img (#PCDATA)>
+<!ATTLIST html:img src CDATA "">
+<!ELEMENT link (html:a+)>
+<!ATTLIST link xmlns:html CDATA "http://www.w3.org/1999/xhtml">
+<!ATTLIST car-id type NMTOKENS "SUV Luxury Sport" rating CDATA "0">
+
+<!ELEMENT truck (truck-id+)>
+<!ELEMENT truck-id (brand, model, year, price, color, km, power, fuel-type, transmission, condition, annotation, image, link)>
+<!ATTLIST truck-id type NMTOKENS "SUV Luxury Sport" rating CDATA "0">
+
+<!ELEMENT moto (moto-id+)>
+<!ELEMENT moto-id (brand, model, year, price, color, km, power, fuel-type, transmission, condition, annotation, image, link)>
+<!ATTLIST moto-id type NMTOKENS "SUV Luxury Sport" rating CDATA "0">
