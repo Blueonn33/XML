@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+
+<root>
+    <h:table xmlns="http://www.w3.org/TR/html5">
+        <h:tr>
+            <h:td>Apples</h:td>
+            <h:td>Bananas</h:td>
+        </h:tr>
+    </h:table>
+    
+    <f:table xmlns="http://www.w3.org/furniture">
+        <f:name>Coffee Table</f:name>
+        <f:width>10</f:width>
+    </f:table>
+</root>
+
+<!-- или -->
+
+<root xmlns="http://www.w3.org/TR/html5" xmlns="http://www.w3.org/furniture">
+    <h:table>
+        <h:tr>
+            <h:td>Apples</h:td>
+            <h:td>Bananas</h:td>
+        </h:tr>
+    </h:table>
+    
+    <f:table>
+        <f:name>Coffee Table</f:name>
+        <f:width>10</f:width>
+    </f:table>
+</root>
+
+<!-- или -->
+
+<root>
+    <table xmlns="http://www.w3.org/TR/html5">
+        <tr>
+            <td>Apples</td>
+            <td>Bananas</td>
+        </tr>
+    </table>
+    
+    <table xmlns="http://www.w3.org/furniture">
+        <name>Coffee Table</name>
+        <width>10</width>
+    </table>
+</root>

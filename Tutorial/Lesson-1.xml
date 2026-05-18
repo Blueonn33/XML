@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<friendList>
+    <friend>
+        <name>Alex</name>
+    </friend>
+    <friend>
+        <name>Mary</name>
+    </friend>
+    <friend>
+        <name>Rachel</name>
+    </friend>
+    <bestFriend>
+        <name>Ana</name>
+    </bestFriend>
+</friendList>
+
+<!-- XML - eXtensible Markup Language -->
